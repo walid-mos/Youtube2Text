@@ -38,6 +38,11 @@ dependencies:
     specifier: 5.1.3
     version: 5.1.3
 
+devDependencies:
+  eslint-config-mkw:
+    specifier: link:/Users/walid/Documents/Developpement/packages/eslint-config-mkw
+    version: link:../../packages/eslint-config-mkw
+
 packages:
 
   /@alloc/quick-lru@5.2.0:
