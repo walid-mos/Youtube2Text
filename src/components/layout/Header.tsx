@@ -2,17 +2,22 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { GITHUB_REPO_URL } from '@/utils/constants'
 
 type NavigationItems = { name: string; href: string; external?: boolean }[]
 
 const navigation: NavigationItems = [
+	{
+		name: 'Home',
+		href: '/',
+	},
 	{
 		name: 'Summarize',
 		href: '/summarize',
 	},
 	{
 		name: 'GitHub',
-		href: 'https://github.com/chronark/envshare',
+		href: GITHUB_REPO_URL,
 		external: true,
 	},
 ]
@@ -31,8 +36,8 @@ const Header: React.FC = () => {
 						{navigation.map((item) => (
 							<li className="" key={item.href}>
 								<Link
-									className={`flex items-center px-3 py-2 duration-300 text-sm sm:text-base hover:text-red-500  dark:hover:text-red-600
-                    ${pathname === item.href ? 'text-red-500 dark:text-red-600' : 'text-zinc-600 dark:text-zinc-50'}`}
+									className={`flex items-center px-3 py-2 duration-300 font-medium text-sm sm:text-base hover:text-red-500  dark:hover:text-red-600
+                    ${pathname === item.href ? 'text-red-600 dark:text-red-600' : 'text-zinc-600 dark:text-zinc-50'}`}
 									href={item.href}
 									target={item.external ? '_blank' : undefined}
 									rel={item.external ? 'noopener noreferrer' : undefined}

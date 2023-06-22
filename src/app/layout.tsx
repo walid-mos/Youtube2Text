@@ -1,7 +1,7 @@
-import './globals.css'
+import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
 
-import Analytics from '@/components/Analytics'
+import Analytics from '@/components/misc/Analytics'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 

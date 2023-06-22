@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { GITHUB_REPO_URL } from '@/utils/constants'
 
 const Home = () => (
 	<>
@@ -15,7 +16,7 @@ const Home = () => (
 				</p>
 				<div className="flex flex-col justify-center gap-4 mx-auto mt-8 sm:flex-row sm:max-w-lg ">
 					<Link
-						href="/links"
+						href="/summarize"
 						className="sm:w-2/3 sm:text-center inline-block transition-all space-x-2
                             rounded px-4 py-1.5 md:py-2 text-base font-semibold leading-7
                             text-zinc-50 bg-zinc-700 dark:text-zinc-700 dark:bg-zinc-50
@@ -29,7 +30,7 @@ const Home = () => (
 			</div>
 			<div className="hidden sm:mt-12 sm:flex sm:justify-center">
 				<Link
-					href="https://github.com/walid-mos/youtube2text"
+					href={GITHUB_REPO_URL}
 					className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 duration-150
                         text-zinc-700 dark:text-zinc-400  ring-zinc-600/10
                         hover:ring-zinc-600/30 dark:ring-zinc-100/10 dark:hover:ring-zinc-100/30"
