@@ -1,6 +1,10 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 
+import Analytics from '@/components/Analytics'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -13,8 +17,20 @@ const RootLayout = ({
 }: {
 	children: React.ReactNode
 }) => (
-	<html lang="en">
-		<body className={inter.className}>{children}</body>
+	<html lang="en" className={inter.className}>
+		<head />
+		<Analytics />
+		<body className="flex flex-col items-center justify-between min-h-screen p-12 bg-slate-50/40 dark:bg-zinc-800">
+			<header className="flex w-full px-4 backdrop-blur bh-zinc-900/50">
+				<Header />
+			</header>
+			<main className="flex flex-col gap-8 my-8 md:gap-16 md:my-14 lg:my-20">
+				{children}
+			</main>
+			<footer className="flex border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
+				<Footer />
+			</footer>
+		</body>
 	</html>
 )
 
