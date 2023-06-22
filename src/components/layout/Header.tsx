@@ -27,7 +27,7 @@ const Header: React.FC = () => {
 	return (
 		<div className="container mx-auto">
 			<div className="flex flex-col items-center justify-between gap-2 pt-6 sm:h-20 sm:flex-row sm:pt-0">
-				<Link href="/" className="text-2xl font-semibold duration-300 text-zinc-700 dark:text-zinc-50 hover:text-red-500 dark:hover:text-red-600">
+				<Link href="/" className="text-2xl font-semibold text-transparent duration-300 bg-gradient-to-tr bg-clip-text from-red-400 to-red-700 hover:text-zinc-700 dark:from-red-200 dark:to-red-500 dark:hover:text-zinc-50">
 					YSumAI
 				</Link>
 				{/* Desktop navigation */}
