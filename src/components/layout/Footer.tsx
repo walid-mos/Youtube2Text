@@ -14,7 +14,7 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 )
 
 const Footer = () => (
-	<div className="flex flex-col gap-1 px-12 pt-8 mx-12 text-xs text-center text-zinc-700 dark:text-zinc-300 max-w-7xl lg:px-8">
+	<div className="flex flex-col gap-1 pt-8 text-xs text-center md:px-12 md:mx-12 text-zinc-700 dark:text-zinc-300 max-w-7xl lg:px-8">
 		<p>
 			Built by <ExternalLink href={GITHUB_PROFILE_URL}>walid-mos</ExternalLink>
 		</p>

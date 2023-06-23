@@ -4,20 +4,20 @@ import { GITHUB_REPO_URL } from '@/utils/constants'
 
 const Home = () => (
 	<>
-		<div className="flex flex-col items-center justify-center max-w-3xl px-8 mx-auto">
+		<div className="flex flex-col items-center justify-center mx-auto sm:px-4 md:px-8 md:max-w-3xl">
 			<div>
-				<h1 className="py-4 text-5xl font-bold tracking-tight text-center text-transparent bg-gradient-to-t bg-clip-text from-zinc-800/70 dark:from-zinc-600/50 to-zinc-400 dark:to-zinc-200 sm:text-7xl">
+				<h1 className="py-4 text-3xl font-bold tracking-tight text-center text-transparent sm:text-5xl bg-gradient-to-t bg-clip-text from-zinc-800/70 dark:from-zinc-600/50 to-zinc-400 dark:to-zinc-200 md:text-7xl">
 					Stop wasting time watching videos. <br />
 					<span className="text-red-600">Read them instead.</span>
 				</h1>
-				<p className="mt-6 leading-5 text-zinc-600 dark:text-zinc-400 sm:text-center">
+				<p className="mt-6 leading-5 text-center text-zinc-600 dark:text-zinc-400">
 					Our AI-powered tool automatically generates a summary of any YouTube video. <br />
 					Just paste the link and get a summary in seconds.
 				</p>
-				<div className="flex flex-col justify-center gap-4 mx-auto mt-8 sm:flex-row sm:max-w-lg ">
+				<div className="flex flex-row justify-center max-w-lg gap-4 mx-auto mt-12 md:mt-8 ">
 					<Link
 						href="/summarize"
-						className="sm:w-2/3 sm:text-center inline-block transition-all space-x-2
+						className=" w-4/5 md:w-2/3 text-center inline-block transition-all space-x-2
                             rounded px-4 py-1.5 md:py-2 text-base font-semibold leading-7
                             text-zinc-50 bg-zinc-700 dark:text-zinc-700 dark:bg-zinc-50
                             hover:text-zinc-100 hover:ring-red-700/80 hover:bg-red-600 dark:hover:text-zinc-100 dark:hover:ring-red-900/80 dark:hover:bg-red-600/90
