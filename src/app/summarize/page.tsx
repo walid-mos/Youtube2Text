@@ -13,16 +13,15 @@ const SummarizePage = () => {
 	const [error] = useState('')
 
 	return (
-		<div className="container mx-auto mb-8 md:mb-16 lg:mb-32">
+		<div className="container mx-auto mt-8 md:mb-16 lg:mb-32">
 			{error ? <ErrorMessage message={error} /> : null}
 
+			<h1 className="py-4 mx-16 text-3xl font-bold text-center text-transparent md:text-4xl lg:text-5xl bg-gradient-to-t bg-clip-text from-red-600 to-red-300 dark:from-zinc-100/60 dark:to-white">
+				Summarize your videos
+			</h1>
 			<form
 				className="max-w-3xl mx-auto"
 			>
-				<h1 className="py-4 mx-16 text-5xl font-bold text-center text-transparent bg-gradient-to-t bg-clip-text from-red-600 to-red-300 dark:from-zinc-100/60 dark:to-white">
-					Summarize your videos
-				</h1>
-
 				<pre className="px-4 py-3 mt-8 font-mono text-left bg-transparent border rounded border-zinc-600 dark:border-zinc-400 focus:ring-0 sm:text-sm text-zinc-700 dark:text-zinc-100">
 					<div className="flex items-start px-1 text-sm">
 						<div aria-hidden="true" className="pr-4 font-mono border-r select-none border-zinc-300/5 text-zinc-700">
