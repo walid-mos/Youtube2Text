@@ -24,7 +24,7 @@ const RootLayout = ({
 			<header className="flex w-full px-4 backdrop-blur bh-zinc-900/50">
 				<Header />
 			</header>
-			<main className="flex flex-col gap-8 my-8 md:gap-16 md:my-14 lg:my-20">
+			<main className="flex flex-col w-full gap-8 my-8 md:gap-16 md:my-14 lg:my-20">
 				{children}
 			</main>
 			<footer className="flex border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">

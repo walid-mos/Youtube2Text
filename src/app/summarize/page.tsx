@@ -1,10 +1,8 @@
 'use client'
 
 import { useState, Fragment } from 'react'
-// import { toBase58 } from '@/utils/base58'
 import ErrorMessage from '@/components/global/error'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
-// import { LATEST_KEY_VERSION } from '@/utils/constants'
 
 const SummarizePage = () => {
 	const [text, setText] = useState('')
@@ -13,16 +11,16 @@ const SummarizePage = () => {
 	const [error] = useState('')
 
 	return (
-		<div className="container mx-auto mt-8 md:mb-16 lg:mb-32">
+		<div className="container w-full mx-auto mt-8 md:mb-16 lg:mb-32">
 			{error ? <ErrorMessage message={error} /> : null}
 
 			<h1 className="py-4 mx-16 text-3xl font-bold text-center text-transparent md:text-4xl lg:text-5xl bg-gradient-to-t bg-clip-text from-red-600 to-red-300 dark:from-zinc-100/60 dark:to-white">
 				Summarize your videos
 			</h1>
 			<form
-				className="max-w-3xl mx-auto"
+				className="max-w-4xl mx-auto"
 			>
-				<pre className="px-4 py-3 mt-8 font-mono text-left bg-transparent border rounded border-zinc-600 dark:border-zinc-400 focus:ring-0 sm:text-sm text-zinc-700 dark:text-zinc-100">
+				<pre className="px-4 py-3 mt-8 font-mono text-left bg-transparent border rounded border-zinc-600 dark:border-zinc-400 focus:ring-0 sm:text-sm md:text-md text-zinc-700 dark:text-zinc-100">
 					<div className="flex items-start px-1 text-sm">
 						<div aria-hidden="true" className="pr-4 font-mono border-r select-none border-zinc-300/5 text-zinc-700">
 							{Array.from({
@@ -44,7 +42,7 @@ const SummarizePage = () => {
 							onChange={(e) => setText(e.target.value)}
 							rows={Math.max(5, text.split('\n').length)}
 							placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-							className="w-full p-0 text-base bg-transparent border-0 appearance-none resize-none hover:resize text-zinc-700 dark:text-zinc-100 placeholder-zinc-600/60 dark:placeholder-zinc-400/70 focus:ring-0 focus-visible:outline-none sm:text-sm"
+							className="w-full p-0 text-base bg-transparent border-0 appearance-none resize-none hover:resize text-zinc-700 dark:text-zinc-100 placeholder-zinc-600/60 dark:placeholder-zinc-400/70 focus:ring-0 focus-visible:outline-none"
 						/>
 					</div>
 				</pre>
@@ -62,7 +60,7 @@ const SummarizePage = () => {
 					<span>{loading ? <Cog6ToothIcon className="w-5 h-5 animate-spin" /> : 'Summarize'}</span>
 				</button>
 				<div className="mt-8">
-					<ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+					<ul className="space-y-2 text-xs sm:text-center text-zinc-600 dark:text-zinc-400">
 						<li>
 							<p>
 								For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize.
