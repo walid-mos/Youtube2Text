@@ -5,6 +5,7 @@ import { useAtomValue, useSetAtom } from 'jotai'
 import { errorMessageAtom, linesAtom } from '@/components/atoms/summarize'
 import TextArea from './TextArea'
 import SubmitButton from './SubmitButton'
+import { saveLinks } from './action'
 
 export interface Inputs extends HTMLButtonElement {
 	text: string
@@ -21,6 +22,7 @@ const Form = () => {
 			setErrorMessage(`For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize. \n Text = ${lines[0]}`)
 		}
 
+		await saveLinks(lines)
 	}
 
 	return (
