@@ -34,9 +34,14 @@
   "devDependencies": {
     "@swc-jotai/react-refresh": "^0.0.8",
     "encoding": "^0.1.13",
-    "eslint-config-mkw": "^1.1.0"
+    "eslint-config-mkw": "^1.1.2"
   },
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "overrides": {
+      "semver@<7.5.2": ">=7.5.2"
+    }
   }
 }
