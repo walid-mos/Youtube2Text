@@ -1,19 +1,28 @@
 'use server'
 
-import { cookies } from 'next/headers'
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { z } from 'zod'
 
-// eslint-disable-next-line import/prefer-default-export
-export const saveLinks = async (links: string[]) => {
-	const supabase = createServerActionClient({ cookies })
-	await supabase.auth.getSession()
+import { withValidate } from '@/utils/form-validation'
 
-	const promesses = links.map((link) => supabase.from('links').insert({ link }))
+// import { cookies } from 'next/headers'
+// import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 
-	const results = await Promise.all(promesses)
+const schema = z.array(z.string().url())
 
-	results.filter((result) => result.error).forEach((result) => {
-		console.error('Error while saving links')
-		console.error(result)
-	})
-}
+export const saveLinks = withValidate((links: string[]) => {
+	// const supabase = createServerActionClient({ cookies })
+	// await supabase.auth.getSession()
+
+	// const promesses = links.map((link) => supabase.from('links').insert({ link, date: new Date() }))
+
+	// const results = await Promise.all(promesses)
+
+	// results.filter((result) => result.error).forEach((result) => {
+	// 	console.error('Error while saving links')
+	// 	console.error(result)
+	// })
+	console.log('HEYYY FROM ACTION')
+	console.log(links)
+
+	return Promise.resolve()
+}, schema)

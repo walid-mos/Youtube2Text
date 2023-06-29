@@ -1,24 +1,33 @@
 'use client'
 
-import { useAtomValue } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
+import { useEffect, useTransition } from 'react'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
-import { isTextAtom, loadingAtom } from '@/components/atoms/summarize'
+import {
+	linesAtom, isTextAtom, loadingAtom,
+} from '@/components/atoms/summarize'
+import { saveLinks } from './action'
 
-import type { Inputs } from './Form'
-
-type Props = {
-	onSubmit: (event: React.MouseEvent<Inputs>) => void
-}
-
-const SubmitButton: React.FC<Props> = ({ onSubmit }) => {
+const SubmitButton = () => {
 	const isText = useAtomValue(isTextAtom)
-	const loading = useAtomValue(loadingAtom)
+	const lines = useAtomValue(linesAtom)
+	const [loading, setLoading] = useAtom(loadingAtom)
+	// const setErrorMessage = useSetAtom(errorMessageAtom)
 
+	const [isPending, startTransition] = useTransition()
+
+	useEffect(() => {
+		setLoading(isPending)
+	}, [isPending])
+
+	// if (lines.length > 0) {
+	// 	setErrorMessage(`For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize. \n Text = ${lines[0]}`)
+	// }
 	return (
 		<button
 			type="submit"
-			onClick={onSubmit}
+			onClick={() => startTransition(() => saveLinks(lines))}
 			disabled={loading || !isText}
 			className={`mt-6 w-full h-12 inline-flex justify-center items-center transition-all rounded-md px-4 py-1.5 md:py-2 text-base font-semibold leading-7 ring-1 ring-transparent duration-500   ${
 				isText
