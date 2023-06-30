@@ -1,11 +1,11 @@
 'use client'
 
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useEffect, useTransition } from 'react'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
 import {
-	linesAtom, isTextAtom, loadingAtom,
+	linesAtom, isTextAtom, loadingAtom, errorMessageAtom,
 } from '@/components/atoms/summarize'
 import { saveLinks } from './action'
 
@@ -13,7 +13,7 @@ const SubmitButton = () => {
 	const isText = useAtomValue(isTextAtom)
 	const lines = useAtomValue(linesAtom)
 	const [loading, setLoading] = useAtom(loadingAtom)
-	// const setErrorMessage = useSetAtom(errorMessageAtom)
+	const setErrorMessage = useSetAtom(errorMessageAtom)
 
 	const [isPending, startTransition] = useTransition()
 
@@ -21,13 +21,25 @@ const SubmitButton = () => {
 		setLoading(isPending)
 	}, [isPending])
 
-	// if (lines.length > 0) {
-	// 	setErrorMessage(`For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize. \n Text = ${lines[0]}`)
-	// }
+	const onClick = async () => {
+		const { errors, data: links } = await saveLinks(lines)
+
+		if (errors?.issues.length) {
+			const { message } = errors.issues[0]
+			setErrorMessage(message)
+			return
+		}
+
+		setErrorMessage('')
+		links.forEach((link) => {
+			console.log(link)
+		})
+	}
+
 	return (
 		<button
 			type="submit"
-			onClick={() => startTransition(() => saveLinks(lines))}
+			onClick={() => startTransition(onClick)}
 			disabled={loading || !isText}
 			className={`mt-6 w-full h-12 inline-flex justify-center items-center transition-all rounded-md px-4 py-1.5 md:py-2 text-base font-semibold leading-7 ring-1 ring-transparent duration-500   ${
 				isText

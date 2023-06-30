@@ -1,15 +1,21 @@
-import { ZodType } from 'zod'
+import type { ZodType, SafeParseReturnType } from 'zod'
+import type { ActionType } from '@/app/summarize/action'
 
-type ActionType<T> = (data: T) => Promise<void>
+const process = <T>(data: T, validation: SafeParseReturnType<T, T>) => {
+	if (!validation.success) {
+		const errors = {
+			isError: true,
+			issues: validation.error.issues.map(({ code, message }) => ({ code, message })),
+		}
 
-export const withValidate = <T>(action: ActionType<T>, schema: ZodType<T>) => async (data: T) => {
-	const valid = await schema.parse(data)
-
-	if (!valid) {
-		throw new Error('Invalid data')
+		return { errors, data }
 	}
 
-	console.log('HEYYY FROM VALIDATION')
+	return { data }
+}
+
+export const withValidate = <T>(action: ActionType<T>, schema: ZodType) => async (formData: T) => {
+	const data = process<T>(formData, schema.safeParse(formData))
 
 	return action(data)
 }
