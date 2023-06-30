@@ -2,6 +2,7 @@
 
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useEffect, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
 import {
@@ -10,6 +11,8 @@ import {
 import { saveLinks } from './action'
 
 const SubmitButton = () => {
+	const router = useRouter()
+
 	const isText = useAtomValue(isTextAtom)
 	const lines = useAtomValue(linesAtom)
 	const [loading, setLoading] = useAtom(loadingAtom)
@@ -22,7 +25,7 @@ const SubmitButton = () => {
 	}, [isPending])
 
 	const onClick = async () => {
-		const { errors, data: links } = await saveLinks(lines)
+		const { errors } = await saveLinks(lines)
 
 		if (errors?.issues.length) {
 			const { message } = errors.issues[0]
@@ -30,10 +33,7 @@ const SubmitButton = () => {
 			return
 		}
 
-		setErrorMessage('')
-		links.forEach((link) => {
-			console.log(link)
-		})
+		router.push('/generate')
 	}
 
 	return (
