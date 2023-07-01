@@ -1,26 +1,14 @@
 'use server'
 
 import { z } from 'zod'
-
 import { withValidate } from '@/utils/form-validation'
+
+import type { ActionProps } from '@/types/server.actions'
+import type { LinksType } from '@/types/types'
 
 const schema = z.array(z.string().url())
 
-type Error = {
-	isError: boolean
-	issues: {
-		code: string,
-		message: string
-	}[]
-}
-
-export type ActionProps<T> = {
-	errors?: Error | null
-	data: T
-}
-export type ActionType<T> = (data: ActionProps<T>) => Promise<ActionProps<T>>
-
-export const saveLinks = withValidate<string[]>((formData: ActionProps<string[]>) => {
+export const saveLinks = withValidate<LinksType>((formData: ActionProps<LinksType>) => {
 	const { errors, data } = formData
 	if (errors?.isError) {
 		return Promise.resolve({ errors, data })

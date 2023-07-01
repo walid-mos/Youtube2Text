@@ -1,5 +1,5 @@
 import type { ZodType, SafeParseReturnType } from 'zod'
-import type { ActionType } from '@/app/summarize/action'
+import type { ActionType } from '@/types/server.actions'
 
 const process = <T>(data: T, validation: SafeParseReturnType<T, T>) => {
 	if (!validation.success) {

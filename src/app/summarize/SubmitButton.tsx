@@ -25,7 +25,7 @@ const SubmitButton = () => {
 	}, [isPending])
 
 	const onClick = async () => {
-		const { errors } = await saveLinks(lines)
+		const { errors, data: links } = await saveLinks(lines)
 
 		if (errors?.issues.length) {
 			const { message } = errors.issues[0]
@@ -33,7 +33,8 @@ const SubmitButton = () => {
 			return
 		}
 
-		router.push('/generate')
+		const params = new URLSearchParams({ links: JSON.stringify(links) })
+		router.push(`/generate?${params.toString()}`)
 	}
 
 	return (
