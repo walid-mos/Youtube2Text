@@ -1,7 +1,7 @@
 import ErrorMessage from '@/components/global/error'
 import Title from '@/components/layout/Title'
 
-import Form from './Form'
+import Form from './_components/Form'
 
 const SummarizePage = async () => (
 	<div className="container w-full mx-auto mt-8 md:mb-16 lg:mb-32">

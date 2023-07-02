@@ -8,7 +8,7 @@ import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import {
 	linesAtom, isTextAtom, loadingAtom, errorMessageAtom,
 } from '@/components/atoms/summarize'
-import { saveLinks } from './action'
+import { saveLinks } from '../action'
 
 const SubmitButton = () => {
 	const router = useRouter()

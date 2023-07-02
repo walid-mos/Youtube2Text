@@ -1,4 +1,4 @@
-import { ZodError } from './Errors'
+import { ZodError } from './errors'
 
 export type ActionProps<T> = {
 	errors?: ZodError | null
