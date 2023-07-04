@@ -1,0 +1,12 @@
+☐ Integrate internationalization to the application @started(23-07-04 23:11)
+☐ Add a new language to the application @started(23-07-04 23:11)
+☐ Add a language switcher to the application
+
+☐ Download videos from YouTube and convert them to MP3
+☐ Connect the OpenAI API to the application
+    -> Do the calcul on server side 
+    -> Send promise to client side 
+    -> useEffect to update the state of Steps
+☐ Transcribe audio files to text
+☐ Summarize text
+☐ Use langchain to use the data by chunks

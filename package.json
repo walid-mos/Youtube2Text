@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.4.0",
     "@heroicons/react": "^2.0.18",
     "@supabase/auth-helpers-nextjs": "^0.7.2",
     "@supabase/supabase-js": "^2.26.0",
@@ -16,14 +17,16 @@
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
-    "@upstash/redis": "^1.22.0",
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "10.4.14",
     "base-x": "^4.0.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "i18next": "^23.2.7",
     "jotai": "^2.2.1",
+    "negotiator": "^0.6.3",
     "next": "13.4.8",
+    "next-intl": "^2.17.1",
     "postcss": "8.4.24",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
@@ -33,6 +36,7 @@
   },
   "devDependencies": {
     "@swc-jotai/react-refresh": "^0.0.8",
+    "@types/negotiator": "^0.6.1",
     "encoding": "^0.1.13",
     "eslint-config-mkw": "^1.1.2"
   },
