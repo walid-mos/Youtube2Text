@@ -2,7 +2,8 @@
 export type LinksType = string[]
 
 // Generate
-export type StepType = ['download' | 'ai' | 'complete']
+const Steps = [boolean, boolean, boolean]
+export type StepType = typeof Steps[number][]
 
 // Components
 export type SVGProps = {

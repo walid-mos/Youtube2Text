@@ -3,6 +3,7 @@ import type { SVGProps } from '@/types/types'
 interface Props extends SVGProps {
 	children: React.ReactNode
 	fill: 'none' | 'currentColor' | 'currentFill'
+	viewBox?: string
 	internalClassName?: string
 }
 
@@ -15,7 +16,7 @@ const Sizes = new Map([
 ])
 
 const SVG: React.FC<Props> = ({
-	children, className, size, internalClassName, fill,
+	children, className, size, internalClassName, fill, viewBox,
 }) => {
 	const sizeClass = Sizes.get(size || 'm')
 
@@ -23,7 +24,7 @@ const SVG: React.FC<Props> = ({
 		<svg
 			aria-hidden="true"
 			className={`${sizeClass} ${className || ''} ${internalClassName || ''}`}
-			viewBox="0 0 20 20"
+			viewBox={viewBox || '0 0 24 24'}
 			fill={fill}
 			xmlns="http://www.w3.org/2000/svg"
 		>
