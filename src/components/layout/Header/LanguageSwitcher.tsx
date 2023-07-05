@@ -2,52 +2,23 @@
 
 import { useEffect, useRef } from 'react'
 import { useCookies } from 'react-cookie'
-import { useRouter, usePathname } from 'next/navigation'
 import { useAtom, useAtomValue } from 'jotai'
 
 import { isLanguageMenuOpenAtom, languagesMenuIndexAtom, isLoadedLanguageMenuAtom } from '@/components/atoms/layout'
-import { ChevronDownIcon, FRFlagIcon, USFlagIcon } from '@/components/icons'
-import StepCheck from '@/components/icons/svg/StepCheck'
+import { ChevronDownIcon } from '@/components/icons'
 
-import { LOCALES_TYPE, LOCALE_COOKIE_NAME } from '@/utils/constants'
-import { generateLocalePath } from '@/utils/url'
+import { LOCALE_COOKIE_NAME } from '@/utils/constants'
 import LoadingAnimated from '@/components/icons/svg/LoadingAnimated'
-
-type LanguagesType = {
-	name: string
-	code: LOCALES_TYPE
-	icon: JSX.Element
-}[]
-
-const languages: LanguagesType = [
-	{
-		name: 'English',
-		code: 'en-US',
-		icon: <USFlagIcon />,
-	},
-	{
-		name: 'Français',
-		code: 'fr',
-		icon: <FRFlagIcon />,
-	},
-]
+import { languages } from '@/locales/languages'
+import LangItem from './LangItem'
 
 const LanguageSwitcher = () => {
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useAtom(isLanguageMenuOpenAtom)
 	const isLoadedLanguageMenuIndex = useAtomValue(isLoadedLanguageMenuAtom)
 	const [languageMenuIndex, setLanguageMenuIndex] = useAtom(languagesMenuIndexAtom)
 
-	const router = useRouter()
-	const pathname = usePathname()
-	const [cookies, setCookie] = useCookies([LOCALE_COOKIE_NAME])
+	const [cookies] = useCookies([LOCALE_COOKIE_NAME])
 	const languageDropdownRef = useRef(null)
-
-	const switchLanguage = (code: LOCALES_TYPE) => {
-		setLanguageMenuIndex(languages.findIndex((lang) => lang.code === code))
-		setIsLanguageMenuOpen(false)
-		setCookie(LOCALE_COOKIE_NAME, code)
-		router.push(generateLocalePath(code, pathname))
-	}
 
 	// Set the language menu index to the current language
 	useEffect(() => {
@@ -81,21 +52,12 @@ const LanguageSwitcher = () => {
 					<div className="relative z-10 w-full overflow-auto bg-white rounded">
 						<ul className="list-reset">
 							<li>
-								{languages.map(({ name, code, icon }) => (
-									<a key={code} onClick={() => switchLanguage(code)} href="#" className="flex items-center px-4 py-2 no-underline transition-colors duration-100 hover:bg-gray-100 hover:no-underline">
-										<span className="inline-block mr-2 flag-icon">
-											{icon}
-										</span>
-										<span className="inline-block">
-											{name}
-										</span>
-										{code === cookies.i18next && (
-											<span className="ml-auto">
-												<StepCheck />
-											</span>
-										)}
-									</a>
-								))}
+								{languages.map((language) => {
+									const isSelected = language.code === languages[languageMenuIndex].code
+									return (
+										<LangItem key={language.code} isSelected={isSelected} {...language} />
+									)
+								})}
 							</li>
 						</ul>
 					</div>

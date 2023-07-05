@@ -1,4 +1,6 @@
-import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
+import { LOCALES } from '@/utils/constants'
+
+import type { LOCALES_TYPE } from '@/locales/languages'
 
 export const generateLocalePath = (locale: LOCALES_TYPE, path: string) => {
 	const pathArray = path.split('/')
