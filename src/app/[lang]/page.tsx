@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
+import Button from './Button'
 
 const Home = () => (
 	<div className="flex flex-col items-center justify-center mx-auto sm:px-4 md:px-8 md:max-w-3xl">
@@ -28,6 +29,7 @@ const Home = () => (
 			</div>
 		</div>
 
+		<Button />
 
 		<div className="hidden sm:mt-12 sm:flex sm:justify-center">
 			<Link
