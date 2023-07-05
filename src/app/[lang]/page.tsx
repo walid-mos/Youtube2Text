@@ -27,6 +27,7 @@ const Home = () => (
 				</Link>
 			</div>
 		</div>
+
 		<div className="hidden sm:mt-12 sm:flex sm:justify-center">
 			<Link
 				href={GITHUB_REPO_URL}
