@@ -1,10 +1,13 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 
 import { isMenuOpenAtom } from '@/components/atoms/layout'
 import { GITHUB_REPO_URL } from '@/utils/constants'
+
+import LanguageSwitcher from './LanguageSwitcher'
 import MenuLink from './MenuLink'
 
 type NavigationItems = { name: string; href: string; external?: boolean }[]
@@ -28,23 +31,33 @@ const navigation: NavigationItems = [
 const Menu = () => {
 	const pathname = usePathname()
 	const isMenuOpen = useAtomValue(isMenuOpenAtom)
+	const setIsMenuOpen = useSetAtom(isMenuOpenAtom)
 
 	return (
-		<div className={`w-full md:flex md:items-center md:w-auto duration-300 origin-top md:transform-none md:h-auto ${!isMenuOpen ? 'scale-y-0 h-0' : 'h-auto'}`}>
-			<ul className="gap-4 border-b-2 grow md:flex md:justify-between md:border-b-0">
-				{navigation.map(({ href, name, external }) => {
-					const isActive = pathname === href
-					return (
-						<MenuLink
-							key={name}
-							{...{
-								isActive, href, name, external,
-							}}
-						/>
-					)
-				})}
-			</ul>
-		</div>
+		<>
+			{/* Mobile navigation */}
+			<Bars3Icon
+				className="block w-6 h-6 text-white transition-all cursor-pointer md:hidden"
+				onClick={() => setIsMenuOpen((prev) => !prev)}
+			/>
+			{/* Desktop navigation */}
+			<div className={`w-full md:flex md:items-center md:w-auto duration-300 origin-top md:transform-none md:h-auto ${!isMenuOpen ? 'scale-y-0 h-0' : 'h-auto'}`}>
+				{!isMenuOpen && <LanguageSwitcher />}
+				<ul className="gap-4 border-b-2 grow md:flex md:justify-between md:border-b-0">
+					{navigation.map(({ href, name, external }) => {
+						const isActive = pathname === href
+						return (
+							<MenuLink
+								key={name}
+								{...{
+									isActive, href, name, external,
+								}}
+							/>
+						)
+					})}
+				</ul>
+			</div>
+		</>
 	)
 }
 

@@ -1,4 +1,4 @@
-import { LoadingAnimated, StepCheck } from '@/components/icons'
+import { LoadingAnimatedIcon, StepCheckIcon } from '@/components/icons'
 
 type BlockProps = {
 	children?: React.ReactNode
@@ -13,7 +13,7 @@ const Block: React.FC<BlockProps> = ({ children, className }) => (
 
 export const ActiveBlock = () => (
 	<Block className="bg-green-200 bg-gradient-to-tr from-stone-700 to-red-500 dark:from-slate-300 dark:to-red-500">
-		<StepCheck size="l" className="text-white dark:text-white " />
+		<StepCheckIcon size="l" className="text-white dark:text-white " />
 	</Block>
 )
 
@@ -23,6 +23,6 @@ export const InactiveBlock = () => (
 
 export const LoadingBlock = () => (
 	<Block className="bg-white">
-		<LoadingAnimated size="2xl" className="rounded-full text-gray-700/20 dark:text-gray-400/30 fill-white/80 bg-gradient-to-tr from-stone-700 to-red-500 dark:from-slate-200 dark:to-red-500" />
+		<LoadingAnimatedIcon size="2xl" className="rounded-full text-gray-700/20 dark:text-gray-400/30 fill-white/80 bg-gradient-to-tr from-stone-700 to-red-500 dark:from-slate-200 dark:to-red-500" />
 	</Block>
 )
