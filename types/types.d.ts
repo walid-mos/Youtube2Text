@@ -2,8 +2,7 @@
 export type LinksType = string[]
 
 // Generate
-const Steps = [boolean, boolean, boolean]
-export type StepType = typeof Steps[number][]
+export type StepType = boolean []
 
 // Components
 export type SVGProps = {
