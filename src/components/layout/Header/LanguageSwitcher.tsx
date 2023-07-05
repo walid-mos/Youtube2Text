@@ -7,7 +7,7 @@ import { useAtom, useAtomValue } from 'jotai'
 import { isLanguageMenuOpenAtom, languagesMenuIndexAtom, isLoadedLanguageMenuAtom } from '@/components/atoms/layout'
 import { ChevronDownIcon } from '@/components/icons'
 
-import { LOCALE_COOKIE_NAME } from '@/utils/constants'
+import { LOCALE_COOKIE_NAME, LOCALE_DEFAULT } from '@/utils/constants'
 import LoadingAnimated from '@/components/icons/svg/LoadingAnimated'
 import { languages } from '@/locales/languages'
 import LangItem from './LangItem'
@@ -22,7 +22,9 @@ const LanguageSwitcher = () => {
 
 	// Set the language menu index to the current language
 	useEffect(() => {
-		setLanguageMenuIndex(languages.findIndex((lang) => lang.code === cookies[LOCALE_COOKIE_NAME]))
+		setLanguageMenuIndex(isLoadedLanguageMenuIndex
+			? languages.findIndex((lang) => lang.code === cookies[LOCALE_COOKIE_NAME])
+			: languages.findIndex((lang) => lang.code === LOCALE_DEFAULT))
 	}, [])
 
 	// Close the language menu when the user clicks outside of it
