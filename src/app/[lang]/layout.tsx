@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import Analytics from '@/components/misc/Analytics'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { LOCALES } from '@/utils/constants'
+import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
 import Providers from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -27,7 +27,7 @@ const RootLayout = ({
 	params,
 }: {
 	children: React.ReactNode
-	params: { lang: string }
+	params: { lang: LOCALES_TYPE }
 }) => (
 	<html lang={params.lang} className={inter.className}>
 		<head />
@@ -35,7 +35,7 @@ const RootLayout = ({
 		<body className="flex flex-col items-center justify-between min-h-screen p-12 bg-slate-50/40 dark:bg-zinc-800">
 			<Providers>
 				<header className="flex w-full px-4 backdrop-blur bh-zinc-900/50">
-					<Header />
+					<Header lang={params.lang} />
 				</header>
 				<main className="flex flex-col w-full gap-8 my-8 md:gap-16 md:my-14 lg:my-20">
 					{children}

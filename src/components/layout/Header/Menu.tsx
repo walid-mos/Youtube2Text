@@ -5,10 +5,14 @@ import { useAtomValue, useSetAtom } from 'jotai'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 
 import { isMenuOpenAtom } from '@/components/atoms/layout'
-import { GITHUB_REPO_URL } from '@/utils/constants'
+import { GITHUB_REPO_URL, type LOCALES_TYPE } from '@/utils/constants'
 
 import LanguageSwitcher from './LanguageSwitcher'
 import MenuLink from './MenuLink'
+
+type Props = {
+	lang: LOCALES_TYPE
+}
 
 type NavigationItems = { name: string; href: string; external?: boolean }[]
 
@@ -28,7 +32,7 @@ const navigation: NavigationItems = [
 	},
 ]
 
-const Menu = () => {
+const Menu: React.FC<Props> = ({ lang }) => {
 	const pathname = usePathname()
 	const isMenuOpen = useAtomValue(isMenuOpenAtom)
 	const setIsMenuOpen = useSetAtom(isMenuOpenAtom)
@@ -54,7 +58,7 @@ const Menu = () => {
 							/>
 						)
 					})}
-					{!isMenuOpen && <LanguageSwitcher />}
+					{!isMenuOpen && <LanguageSwitcher lang={lang} />}
 				</ul>
 			</div>
 		</>

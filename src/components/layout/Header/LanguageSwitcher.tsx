@@ -1,17 +1,19 @@
 'use client'
 
 import {
-	useState, useEffect, useRef,
+	useEffect, useRef,
 } from 'react'
-import { useCookies } from 'react-cookie'
 import { useAtom } from 'jotai'
 
 import { isLanguageMenuOpenAtom } from '@/components/atoms/layout'
 import { ChevronDownIcon, FRFlagIcon, USFlagIcon } from '@/components/icons'
-
-import { LOCALE_COOKIE_NAME, LOCALE_DEFAULT, LOCALES_TYPE } from '@/utils/constants'
-import LoadingAnimated from '@/components/icons/svg/LoadingAnimated'
 import LangItem from './LangItem'
+
+import type { LOCALES_TYPE } from '@/utils/constants'
+
+type Props = {
+	lang: LOCALES_TYPE
+}
 
 type LanguagesType = {
 	name: string
@@ -19,7 +21,7 @@ type LanguagesType = {
 	icon: JSX.Element
 }
 
-export const languages: LanguagesType[] = [
+export const languagesArray: LanguagesType[] = [
 	{
 		name: 'English',
 		code: 'en-US',
@@ -32,20 +34,11 @@ export const languages: LanguagesType[] = [
 	},
 ]
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher: React.FC<Props> = ({ lang }) => {
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useAtom(isLanguageMenuOpenAtom)
-	const [localeState, setLocale] = useState<LanguagesType | null>(null)
 	const languageDropdownRef = useRef(null)
 
-	const [cookies] = useCookies([LOCALE_COOKIE_NAME])
-
-	useEffect(() => {
-		const locale = languages.find(({ code }) => {
-			if (!cookies[LOCALE_COOKIE_NAME]) return code === LOCALE_DEFAULT
-			return code === cookies[LOCALE_COOKIE_NAME]
-		}) as LanguagesType
-		setLocale(locale)
-	}, [cookies])
+	const localeObject = languagesArray.find(({ code }) => code === lang) as LanguagesType
 
 	// Close the language menu when the user clicks outside of it
 	useEffect(() => {
@@ -64,17 +57,17 @@ const LanguageSwitcher = () => {
 		<div className="relative hidden pb-5 md:block">
 			<button type="button" className="flex items-center py-2 pl-5 pr-3 text-gray-500 bg-white rounded shadow focus:outline-none" onClick={() => setIsLanguageMenuOpen((get) => !get)}>
 				<span className="pr-4">
-					{ localeState ? localeState.icon : <LoadingAnimated className="rounded-full text-gray-700/20 dark:text-gray-400/30 fill-white/80" />}
+					{ localeObject.icon}
 				</span>
 				<ChevronDownIcon size="s" />
 			</button>
-			{isLanguageMenuOpen && localeState && (
+			{isLanguageMenuOpen && (
 				<div className="absolute top-0 right-0 z-30 w-48 min-w-full mt-12 text-sm text-gray-700 bg-white rounded shadow-md" ref={languageDropdownRef}>
 					<span className="absolute top-0 right-0 w-3 h-3 mr-3 -mt-1 transform rotate-45 bg-white" />
 					<div className="relative z-10 w-full overflow-auto bg-white rounded">
 						<ul className="list-reset">
-							{languages.map((language) => {
-								const isSelected = language.code === localeState.code
+							{languagesArray.map((language) => {
+								const isSelected = language.code === localeObject.code
 								return (
 									<li key={language.code}>
 										<LangItem isSelected={isSelected} {...language} />
