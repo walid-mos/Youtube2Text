@@ -8,4 +8,10 @@ const dictionaries = new Map(
 	]),
 )
 
-export const getDictionary = async (locale: LOCALES_TYPE) => dictionaries.get(locale)
+export const getDictionary = async (locale: LOCALES_TYPE) => {
+	const dictionary = dictionaries.get(locale)
+	if (!dictionary) {
+		throw new Error(`Dictionary for locale ${locale} not found`)
+	}
+	return dictionary()
+}

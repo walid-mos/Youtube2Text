@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import Negotiator from 'negotiator'
 import { match as matchLocale } from '@formatjs/intl-localematcher'
-import { LOCALES } from '@/utils/constants'
+import { LOCALES, LOCALE_COOKIE_NAME } from '@/utils/constants'
 
 // import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
@@ -15,10 +15,13 @@ const getLocale = (request: NextRequest) => {
 	request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
 	const locales: string[] = [...LOCALES.langs]
-
 	const languages = new Negotiator({ headers: negotiatorHeaders }).languages(
 		locales,
 	)
+
+	if (request.cookies.has(LOCALE_COOKIE_NAME)) {
+		return matchLocale([request.cookies.get(LOCALE_COOKIE_NAME)?.value as string], locales, LOCALES.defaultLocale)
+	}
 
 	const locale = matchLocale(languages, locales, LOCALES.defaultLocale)
 
