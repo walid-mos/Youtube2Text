@@ -1,10 +1,15 @@
 import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
 import 'server-only'
 
+type DictionaryType = typeof import('./dictionaries/en-US')
+
 const dictionaries = new Map(
 	LOCALES.langs.map((code) => [
 		code,
-		() => import(`./dictionaries/${code}.json`).then((module) => module.default),
+		async () => {
+			const dictionary = await import(`./dictionaries/${code}`) as DictionaryType
+			return dictionary.default
+		},
 	]),
 )
 
