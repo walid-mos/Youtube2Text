@@ -2,7 +2,7 @@
 
 import { useAtomValue } from 'jotai'
 
-import { errorMessageAtom } from '@/components/atoms/summarize'
+import { errorMessageAtom } from '@/atoms/summarize'
 
 const ErrorMessage = () => {
 	const errorMessage = useAtomValue(errorMessageAtom)

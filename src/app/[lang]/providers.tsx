@@ -2,7 +2,11 @@
 
 import { Provider as Jotai } from 'jotai'
 
-const Providers = ({ children }: React.PropsWithChildren) => (
+type Props = {
+	children: React.ReactNode
+}
+
+const Providers: React.FC<Props> = ({ children }) => (
 	<Jotai>
 		{children}
 	</Jotai>

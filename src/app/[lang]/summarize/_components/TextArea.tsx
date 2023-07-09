@@ -3,7 +3,7 @@
 import { Fragment } from 'react'
 import { useAtom, useAtomValue } from 'jotai'
 
-import { linesAtom, textAtom } from '@/components/atoms/summarize'
+import { linesAtom, textAtom } from '@/atoms/summarize'
 
 const TextArea = () => {
 	const [text, setText] = useAtom(textAtom)

@@ -1,13 +1,13 @@
 'use client'
 
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useEffect, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
 import {
 	linesAtom, isTextAtom, loadingAtom, errorMessageAtom,
-} from '@/components/atoms/summarize'
+} from '@/atoms/summarize'
 import { saveLinks } from '../action'
 
 const SubmitButton = () => {
@@ -25,8 +25,10 @@ const SubmitButton = () => {
 	}, [isPending])
 
 	const onClick = async () => {
-		const { errors, data: links } = await saveLinks(lines)
+		const returnValue = await saveLinks(lines)
+		console.log(returnValue)
 
+		const { errors, data: links } = returnValue
 		if (errors?.issues.length) {
 			const { message } = errors.issues[0]
 			setErrorMessage(message)

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 
-import { isMenuOpenAtom } from '@/components/atoms/layout'
+import { isMenuOpenAtom } from '@/atoms/layout'
 import { GITHUB_REPO_URL, type LOCALES_TYPE } from '@/utils/constants'
 
 import LanguageSwitcher from './LanguageSwitcher'

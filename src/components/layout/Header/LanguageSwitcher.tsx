@@ -5,7 +5,7 @@ import {
 } from 'react'
 import { useAtom } from 'jotai'
 
-import { isLanguageMenuOpenAtom } from '@/components/atoms/layout'
+import { isLanguageMenuOpenAtom } from '@/atoms/layout'
 import { ChevronDownIcon, FRFlagIcon, USFlagIcon } from '@/components/icons'
 import LangItem from './LangItem'
 

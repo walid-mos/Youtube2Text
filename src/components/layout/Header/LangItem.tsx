@@ -2,13 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCookies } from 'react-cookie'
 
 // import { generateLocalePath } from '@/utils/url'
 import StepCheck from '@/components/icons/svg/StepCheck'
-import { LOCALES_TYPE, LOCALE_COOKIE_NAME } from '@/utils/constants'
+import { LOCALES_TYPE } from '@/utils/constants'
 import { useSetAtom } from 'jotai'
-import { isLanguageMenuOpenAtom } from '@/components/atoms/layout'
+import { isLanguageMenuOpenAtom } from '@/atoms/layout'
 
 type Props = {
 	name: string
@@ -22,11 +21,9 @@ const LangItem = ({
 }: Props) => {
 	const pathname = usePathname()
 	const setIsLanguageMenuOpen = useSetAtom(isLanguageMenuOpenAtom)
-	const [, setCookie] = useCookies([LOCALE_COOKIE_NAME])
 
-	const onClick = (newLangCode: LOCALES_TYPE) => {
+	const onClick = () => {
 		setIsLanguageMenuOpen(false)
-		setCookie(LOCALE_COOKIE_NAME, newLangCode)
 	}
 
 	const switchLanguage = (newLangCode: LOCALES_TYPE) => {
@@ -37,7 +34,7 @@ const LangItem = ({
 	}
 
 	return (
-		<Link href={switchLanguage(code)} onClick={() => onClick(code)} className="flex items-center px-4 py-2 no-underline transition-colors duration-100 hover:bg-gray-100 hover:no-underline">
+		<Link href={switchLanguage(code)} onClick={() => onClick()} className="flex items-center px-4 py-2 no-underline transition-colors duration-100 hover:bg-gray-100 hover:no-underline">
 			<span className="inline-block mr-2 flag-icon">
 				{icon}
 			</span>
