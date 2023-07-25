@@ -1,17 +1,33 @@
 {
-    "home": {
-      "title": {
-        "1": "Ne perdez plus de temps à regarder des vidéos.",
-        "2": "Lisez-les plutôt."
+  "layout": {
+    "menu": {
+      "home": "Accueil",
+      "summarize": "Résumé",
+      "github": "GitHub"
+    },
+    "footer": {
+      "built": "Construit par",
+      "deployed": {
+        "1": "YSumAI est déployé sur",
+        "2": "et utilise",
+        "3": "pour stocker de facon sécurisé les données"
       },
-      "description": {
-        "1": "Notre outil alimenté par l'IA génère automatiquement un résumé de toute vidéo YouTube.",
-        "2": "Collez simplement le lien et obtenez un résumé en quelques secondes."
-      },
-      "button_summarize": "Commencer",
-      "github_link": {
-        "text": "YSumAI est Open Source sur",
-        "name": "GitHub"
-      }
+      "powered": "La technologie AI est fournie par"
+    }
+  },
+  "home": {
+    "title": {
+      "1": "Ne perdez plus de temps à regarder des vidéos",
+      "2": "Lisez-les plutôt"
+    },
+    "description": {
+      "1": "Notre outil alimenté par l'IA génère automatiquement un résumé de toute vidéo YouTube",
+      "2": "Collez simplement le lien et obtenez un résumé en quelques secondes"
+    },
+    "button_summarize": "Commencer",
+    "github_link": {
+      "text": "YSumAI est Open Source sur",
+      "name": "GitHub"
     }
   }
+}

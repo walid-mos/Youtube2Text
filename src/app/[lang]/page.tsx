@@ -3,6 +3,9 @@ import { useTranslations } from 'next-intl'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
 
+// TODO : when next-intl will support SSG, move this to root layout
+export const generateStaticParams = async () => []
+
 const Home = () => {
 	const t = useTranslations('home')
 
@@ -14,8 +17,8 @@ const Home = () => {
 					<span className="text-red-600">{t('title.2')}</span>
 				</h1>
 				<p className="mt-6 leading-5 text-center text-zinc-600 dark:text-zinc-400">
-					{t('description.1')} <br />
-					{t('description.2')}
+					{t('description.1')}. <br />
+					{t('description.2')}.
 				</p>
 				<div className="flex flex-row justify-center max-w-lg gap-4 mx-auto mt-12 md:mt-8 ">
 					<Link

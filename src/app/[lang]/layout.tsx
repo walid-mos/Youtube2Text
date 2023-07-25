@@ -3,8 +3,8 @@ import { useLocale } from 'next-intl'
 import { Inter } from 'next/font/google'
 
 import Analytics from '@/components/misc/Analytics'
-import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import Header from '@/components/layout/Header'
 import { LOCALES_TYPE } from '@/utils/constants'
 import Providers from './providers'
 

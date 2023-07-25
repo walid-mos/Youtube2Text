@@ -1,17 +1,33 @@
 {
-    "home": {
-      "title": {
-        "1": "Stop wasting time watching videos.",
-        "2": "Read them instead."
+  "layout": {
+    "menu": {
+      "home": "Home",
+      "summarize": "Summarize",
+      "github": "GitHub"
+    },
+    "footer": {
+      "built": "Built by",
+      "deployed": {
+        "1": "YSumAI is deployed on",
+        "2": "and uses",
+        "3": "for storing encrypted data"
       },
-      "description": {
-        "1": "Our AI-powered tool automatically generates a summary of any YouTube video.",
-        "2": "Just paste the link and get a summary in seconds."
-      },
-      "button_summarize": "Start summarize",
-      "github_link": {
-        "text": "YSumAI is Open Source on",
-        "name": "GitHub"
-      }
+      "powered": "The AI technology is powered by"
+    }
+  },
+  "home": {
+    "title": {
+      "1": "Stop wasting time watching videos",
+      "2": "Read them instead"
+    },
+    "description": {
+      "1": "Our AI-powered tool automatically generates a summary of any YouTube video",
+      "2": "Just paste the link and get a summary in seconds"
+    },
+    "button_summarize": "Start summarize",
+    "github_link": {
+      "text": "YSumAI is Open Source on",
+      "name": "GitHub"
     }
   }
+}

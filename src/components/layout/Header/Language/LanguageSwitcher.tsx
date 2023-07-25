@@ -5,7 +5,7 @@ import {
 } from 'react'
 import { useAtom } from 'jotai'
 
-import { isLanguageMenuOpenAtom } from '@/atoms/layout'
+import { isLanguageMenuOpenAtom, isMenuOpenAtom } from '@/atoms/layout'
 import { ChevronDownIcon, FRFlagIcon, USFlagIcon } from '@/components/icons'
 import LangItem from './LangItem'
 
@@ -35,6 +35,7 @@ export const languagesArray: LanguagesType[] = [
 ]
 
 const LanguageSwitcher: React.FC<Props> = ({ lang }) => {
+	const [isMenuOpen] = useAtom(isMenuOpenAtom)
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useAtom(isLanguageMenuOpenAtom)
 	const languageDropdownRef = useRef(null)
 
@@ -52,6 +53,8 @@ const LanguageSwitcher: React.FC<Props> = ({ lang }) => {
 		// clean up
 		return () => document.removeEventListener('click', handleClick)
 	}, [isLanguageMenuOpen])
+
+	if (isMenuOpen) return false
 
 	return (
 		<div className="relative hidden pb-5 md:block">
