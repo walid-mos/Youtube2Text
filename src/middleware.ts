@@ -1,8 +1,9 @@
+import createIntlMiddleware from 'next-intl/middleware'
+
 import { LOCALES } from '@/utils/constants'
 
 // import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
-import createIntlMiddleware from 'next-intl/middleware'
 import type { NextRequest } from 'next/server'
 // import type { Database } from '@/types/database.types'
 

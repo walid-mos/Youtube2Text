@@ -1,6 +1,6 @@
-import SVG from '../SVG'
-
 import type { SVGProps } from '@/types/types'
+
+import SVG from '../SVG'
 
 const LoadingAnimated: React.FC<SVGProps> = ({ ...props }) => (
 	<div role="status">

@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import Menu from './Menu'
 
 import type { LOCALES_TYPE } from '@/utils/constants'
+
+import Menu from './Menu'
 
 type Props = {
 	lang: LOCALES_TYPE

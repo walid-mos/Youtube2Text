@@ -1,7 +1,7 @@
 import Title from '@/components/layout/Title'
+import type { LinksType } from '@/types/types'
 
 import Timeline from './_components/Timeline'
-import type { LinksType } from '@/types/types'
 
 type Props = {
 	searchParams: {

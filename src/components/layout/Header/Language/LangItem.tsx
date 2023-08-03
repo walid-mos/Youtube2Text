@@ -2,11 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSetAtom } from 'jotai'
 
-// import { generateLocalePath } from '@/utils/url'
 import StepCheck from '@/components/icons/svg/StepCheck'
 import { LOCALES_TYPE } from '@/utils/constants'
-import { useSetAtom } from 'jotai'
 import { isLanguageMenuOpenAtom } from '@/atoms/layout'
 
 type Props = {

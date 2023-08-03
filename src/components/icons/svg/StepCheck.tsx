@@ -1,7 +1,8 @@
 import { CheckIcon } from '@heroicons/react/24/solid'
-import SVG from '../SVG'
 
 import type { SVGProps } from '@/types/types'
+
+import SVG from '../SVG'
 
 const StepCheck: React.FC<SVGProps> = ({ ...props }) => (
 	<SVG {...props} fill="currentColor">

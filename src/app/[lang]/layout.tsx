@@ -6,6 +6,7 @@ import Analytics from '@/components/misc/Analytics'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import { LOCALES_TYPE } from '@/utils/constants'
+
 import Providers from './providers'
 
 const inter = Inter({ subsets: ['latin'] })

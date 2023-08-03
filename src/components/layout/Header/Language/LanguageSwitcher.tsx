@@ -7,9 +7,9 @@ import { useAtom } from 'jotai'
 
 import { isLanguageMenuOpenAtom, isMenuOpenAtom } from '@/atoms/layout'
 import { ChevronDownIcon, FRFlagIcon, USFlagIcon } from '@/components/icons'
-import LangItem from './LangItem'
-
 import type { LOCALES_TYPE } from '@/utils/constants'
+
+import LangItem from './LangItem'
 
 type Props = {
 	lang: LOCALES_TYPE

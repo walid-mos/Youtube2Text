@@ -1,6 +1,7 @@
+import { useTranslations } from 'next-intl'
+
 import { GITHUB_REPO_URL, type LOCALES_TYPE } from '@/utils/constants'
 
-import { useTranslations } from 'next-intl'
 import LanguageSwitcher from '../Language/LanguageSwitcher'
 import MenuLink from './Links'
 import MobileBars from './MobileButton'

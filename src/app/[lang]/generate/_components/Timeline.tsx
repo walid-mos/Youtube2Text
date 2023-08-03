@@ -1,6 +1,7 @@
 'use client'
 
 import { useAtomValue } from 'jotai'
+
 import { StepAtom, StepLoadingAtom } from '@/atoms/generate'
 
 import TimelineComponent from './TimelineStep'
