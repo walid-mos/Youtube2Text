@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useSetAtom } from 'jotai'
 
 import StepCheck from '@/components/icons/svg/StepCheck'
-import { LOCALES_TYPE } from '@/utils/constants'
+import type { LOCALES_TYPE } from '@/utils/constants'
 import { isLanguageMenuOpenAtom } from '@/atoms/layout'
 
 type Props = {

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { GITHUB_REPO_URL } from '@/utils/constants'
 
 // TODO : when next-intl will support SSG, move this to root layout
-export const generateStaticParams = async () => []
+// export const generateStaticParams = async () => []
 
 const Home = () => {
 	const t = useTranslations('home')
