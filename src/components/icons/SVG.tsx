@@ -16,14 +16,21 @@ const Sizes = new Map([
 ])
 
 const SVG: React.FC<Props> = ({
-	children, className, size, internalClassName, fill, viewBox,
+	children,
+	className,
+	size,
+	internalClassName,
+	fill,
+	viewBox,
 }) => {
 	const sizeClass = Sizes.get(size || 'm')
 
 	return (
 		<svg
 			aria-hidden="true"
-			className={`${sizeClass} ${className || ''} ${internalClassName || ''}`}
+			className={`${sizeClass} ${className || ''} ${
+				internalClassName || ''
+			}`}
 			viewBox={viewBox || '0 0 24 24'}
 			fill={fill}
 			xmlns="http://www.w3.org/2000/svg"

@@ -6,10 +6,6 @@ type Props = {
 	children: React.ReactNode
 }
 
-const Providers: React.FC<Props> = ({ children }) => (
-	<Jotai>
-		{children}
-	</Jotai>
-)
+const Providers: React.FC<Props> = ({ children }) => <Jotai>{children}</Jotai>
 
 export default Providers

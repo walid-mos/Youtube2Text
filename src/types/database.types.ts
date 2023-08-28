@@ -1,10 +1,10 @@
 export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json }
-  | Json[]
+	| string
+	| number
+	| boolean
+	| null
+	| { [key: string]: Json }
+	| Json[]
 
 export interface Database {
 	graphql_public: {
@@ -91,7 +91,7 @@ export interface Database {
 						columns: ['owner']
 						referencedRelation: 'users'
 						referencedColumns: ['id']
-					}
+					},
 				]
 			}
 			migrations: {
@@ -164,7 +164,7 @@ export interface Database {
 						columns: ['owner']
 						referencedRelation: 'users'
 						referencedColumns: ['id']
-					}
+					},
 				]
 			}
 		}

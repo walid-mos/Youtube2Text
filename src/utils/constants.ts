@@ -7,4 +7,4 @@ export const GITHUB_REPO_URL = 'https://github.com/walid-mos/youtube2text'
 
 export const LOCALES = ['en-US', 'fr'] as const
 export const LOCALE_DEFAULT = LOCALES[0]
-export type LOCALES_TYPE = typeof LOCALES[number]
+export type LOCALES_TYPE = (typeof LOCALES)[number]

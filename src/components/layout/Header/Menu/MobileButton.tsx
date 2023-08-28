@@ -11,7 +11,7 @@ const MobileBars = () => {
 	return (
 		<Bars3Icon
 			className="block w-6 h-6 text-white transition-all cursor-pointer md:hidden"
-			onClick={() => setIsMenuOpen((prev) => !prev)}
+			onClick={() => setIsMenuOpen(prev => !prev)}
 		/>
 	)
 }

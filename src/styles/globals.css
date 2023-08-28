@@ -3,15 +3,14 @@
 @tailwind utilities;
 
 @layer utilities {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      @apply appearance-none;
-    }
-  
-    
-    input[type="file"] {
-      @apply appearance-none;
-    }
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		@apply appearance-none;
+	}
+
+	input[type='file'] {
+		@apply appearance-none;
+	}
 }
 
 /* :root {

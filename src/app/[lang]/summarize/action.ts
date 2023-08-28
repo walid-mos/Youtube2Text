@@ -3,22 +3,24 @@
 import { z } from 'zod'
 
 import { withValidate } from '@/utils/form-validation'
+
 import type { ActionProps } from '@/types/server.actions'
 import type { LinksType } from '@/types/types'
 
-const schema = z.array(
-	z.string().url(),
+const schema = z.array(z.string().url())
+
+export const saveLinks = withValidate<LinksType>(
+	async (formData: ActionProps<LinksType>) => {
+		const { errors, data } = formData
+		// console.log({ formData })
+		if (errors?.isError) {
+			return { errors, data }
+		}
+
+		return { data }
+	},
+	schema,
 )
-
-export const saveLinks = withValidate<LinksType>(async (formData: ActionProps<LinksType>) => {
-	const { errors, data } = formData
-	console.log({ formData })
-	if (errors?.isError) {
-		return { errors, data }
-	}
-
-	return { data }
-}, schema)
 
 // // import { cookies } from 'next/headers'
 // // import { createServerActionClient } from '@supabase/auth-helpers-nextjs'

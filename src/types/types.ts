@@ -2,7 +2,7 @@
 export type LinksType = string[]
 
 // Generate
-export type StepType = boolean []
+export type StepType = boolean[]
 
 // Components
 export type SVGProps = {

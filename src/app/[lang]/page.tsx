@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import { useTranslations } from 'next-intl'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
@@ -42,9 +43,10 @@ const Home = () => {
                         text-zinc-700 dark:text-zinc-400  ring-zinc-600/10
                         hover:ring-zinc-600/30 dark:ring-zinc-100/10 dark:hover:ring-zinc-100/30"
 				>
-					{t('github_link.text')} {' '}
+					{t('github_link.text')}{' '}
 					<span className="font-semibold text-zinc-500 dark:text-zinc-200">
-						{t('github_link.name')} <span aria-hidden="true">&rarr;</span>
+						{t('github_link.name')}{' '}
+						<span aria-hidden="true">&rarr;</span>
 					</span>
 				</Link>
 			</div>

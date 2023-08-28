@@ -1,12 +1,14 @@
 import type { ActionType } from '@/types/server.actions'
-
 import type { ZodType, SafeParseReturnType } from 'zod'
 
 const process = <T>(data: T, validation: SafeParseReturnType<T, T>) => {
 	if (!validation.success) {
 		const errors = {
 			isError: true,
-			issues: validation.error.issues.map(({ code, message }) => ({ code, message })),
+			issues: validation.error.issues.map(({ code, message }) => ({
+				code,
+				message,
+			})),
 		}
 
 		return { errors, data }
@@ -15,8 +17,10 @@ const process = <T>(data: T, validation: SafeParseReturnType<T, T>) => {
 	return { data }
 }
 
-export const withValidate = <T>(action: ActionType<T>, schema: ZodType) => async (formData: T) => {
-	const data = process<T>(formData, schema.safeParse(formData))
+export const withValidate =
+	<T>(action: ActionType<T>, schema: ZodType) =>
+	async (formData: T) => {
+		const data = process<T>(formData, schema.safeParse(formData))
 
-	return action(data)
-}
+		return action(data)
+	}

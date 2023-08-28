@@ -43,7 +43,9 @@ const Menu: React.FC<Props> = ({ lang }) => {
 						<li key={name}>
 							<MenuLink
 								{...{
-									href, name: t(name), external,
+									href,
+									name: t(name),
+									external,
 								}}
 							/>
 						</li>

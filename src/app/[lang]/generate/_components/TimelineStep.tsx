@@ -9,12 +9,17 @@ type Props = {
 }
 
 const TimelineComponent: React.FC<Props> = ({
-	label, details, isStepActive, last, isLoadingStep,
+	label,
+	details,
+	isStepActive,
+	last,
+	isLoadingStep,
 }) => {
 	let titleClassname = 'text-gray-800/40 dark:text-gray-200/30'
 
 	if (isStepActive) titleClassname = 'text-gray-900 dark:text-gray-200'
-	if (isLoadingStep) titleClassname = 'text-gray-800 dark:text-gray-300 animate-pulse'
+	if (isLoadingStep)
+		titleClassname = 'text-gray-800 dark:text-gray-300 animate-pulse'
 
 	return (
 		<li className={`${!last && 'mb-14 md:mb-20'} ml-20`}>
@@ -23,8 +28,8 @@ const TimelineComponent: React.FC<Props> = ({
 			{isLoadingStep && <LoadingBlock />}
 
 			<div className={titleClassname}>
-				<h3 className="font-medium leading-tight">{ label }</h3>
-				<p className="text-sm">{ details }</p>
+				<h3 className="font-medium leading-tight">{label}</h3>
+				<p className="text-sm">{details}</p>
 			</div>
 		</li>
 	)

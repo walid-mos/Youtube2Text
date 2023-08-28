@@ -6,7 +6,9 @@ type BlockProps = {
 }
 
 const Block: React.FC<BlockProps> = ({ children, className }) => (
-	<span className={`absolute flex items-center justify-center w-12 h-12 rounded-full -left-6 ${className}`}>
+	<span
+		className={`absolute flex items-center justify-center w-12 h-12 rounded-full -left-6 ${className}`}
+	>
 		{children}
 	</span>
 )
@@ -17,12 +19,13 @@ export const ActiveBlock = () => (
 	</Block>
 )
 
-export const InactiveBlock = () => (
-	<Block className="bg-gray-100" />
-)
+export const InactiveBlock = () => <Block className="bg-gray-100" />
 
 export const LoadingBlock = () => (
 	<Block className="bg-white">
-		<LoadingAnimatedIcon size="2xl" className="rounded-full text-gray-700/20 dark:text-gray-400/30 fill-white/80 bg-gradient-to-tr from-stone-700 to-red-500 dark:from-slate-200 dark:to-red-500" />
+		<LoadingAnimatedIcon
+			size="2xl"
+			className="rounded-full text-gray-700/20 dark:text-gray-400/30 fill-white/80 bg-gradient-to-tr from-stone-700 to-red-500 dark:from-slate-200 dark:to-red-500"
+		/>
 	</Block>
 )

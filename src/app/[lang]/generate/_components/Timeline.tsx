@@ -34,9 +34,16 @@ const Timeline = () => {
 				{TimelineInfos.map(({ id, ...infos }, index) => {
 					const last = index === TimelineInfos.length - 1
 					const isLoadingStep = loadingStepState === index
-					const isStepActive = activeStepState.length - 1 >= index && !isLoadingStep
+					const isStepActive =
+						activeStepState.length - 1 >= index && !isLoadingStep
 					return (
-						<TimelineComponent key={id} {...infos} last={last} isStepActive={isStepActive} isLoadingStep={isLoadingStep} />
+						<TimelineComponent
+							key={id}
+							{...infos}
+							last={last}
+							isStepActive={isStepActive}
+							isLoadingStep={isLoadingStep}
+						/>
 					)
 				})}
 			</ol>
