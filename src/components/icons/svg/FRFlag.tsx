@@ -1,4 +1,5 @@
 import { FR } from 'country-flag-icons/react/3x2'
+
 import SVG from '../SVG'
 
 import type { SVGProps } from '@/types/types'

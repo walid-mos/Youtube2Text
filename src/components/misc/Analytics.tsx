@@ -6,7 +6,7 @@ const track = ['/', '/share', '/deploy', '/unseal']
 
 const Analytics = () => (
 	<VercelAnalytics
-		beforeSend={(event) => {
+		beforeSend={event => {
 			const url = new URL(event.url)
 			if (!track.includes(url.pathname)) {
 				url.pathname = '/__redacted'

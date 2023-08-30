@@ -5,6 +5,6 @@ export const LATEST_KEY_VERSION = 2
 export const GITHUB_PROFILE_URL = 'https://github.com/walid-mos'
 export const GITHUB_REPO_URL = 'https://github.com/walid-mos/youtube2text'
 
-export const LOCALE_COOKIE_NAME = 'i18next'
-export const LOCALE_DEFAULT = 'en-US'
-export const LOCALES = [LOCALE_DEFAULT, 'fr']
+export const LOCALES = ['en-US', 'fr'] as const
+export const LOCALE_DEFAULT = LOCALES[0]
+export type LOCALES_TYPE = (typeof LOCALES)[number]

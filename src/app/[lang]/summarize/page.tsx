@@ -1,16 +1,25 @@
+import { useTranslations } from 'next-intl'
+
 import ErrorMessage from '@/components/global/error'
 import Title from '@/components/layout/Title'
 
 import Form from './_components/Form'
 
-const SummarizePage = async () => (
-	<div className="container w-full mx-auto mt-8 md:mb-16 lg:mb-32">
-		<ErrorMessage />
+// TODO : when next-intl will support SSG, move this to root layout
+// export const generateStaticParams = async () => []
 
-		<Title label="Summarize your videos" />
+const SummarizePage = () => {
+	const t = useTranslations('summarize')
 
-		<Form />
-	</div>
-)
+	return (
+		<div className="container w-full mx-auto mt-8 md:mb-16 lg:mb-32">
+			<ErrorMessage />
+
+			<Title label={t('title')} />
+
+			<Form />
+		</div>
+	)
+}
 
 export default SummarizePage

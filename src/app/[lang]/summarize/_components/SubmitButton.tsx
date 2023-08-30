@@ -1,16 +1,26 @@
 'use client'
 
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { useEffect, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+
+import { useEffect, useTransition } from 'react'
+
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
 import {
-	linesAtom, isTextAtom, loadingAtom, errorMessageAtom,
-} from '@/components/atoms/summarize'
+	linesAtom,
+	isTextAtom,
+	loadingAtom,
+	errorMessageAtom,
+} from '@/atoms/summarize'
+
 import { saveLinks } from '../action'
 
-const SubmitButton = () => {
+type Props = {
+	label: string
+}
+
+const SubmitButton: React.FC<Props> = ({ label }) => {
 	const router = useRouter()
 
 	const isText = useAtomValue(isTextAtom)
@@ -25,8 +35,10 @@ const SubmitButton = () => {
 	}, [isPending])
 
 	const onClick = async () => {
-		const { errors, data: links } = await saveLinks(lines)
+		const returnValue = await saveLinks(lines)
+		// console.log(returnValue)
 
+		const { errors, data: links } = returnValue
 		if (errors?.issues.length) {
 			const { message } = errors.issues[0]
 			setErrorMessage(message)
@@ -46,10 +58,15 @@ const SubmitButton = () => {
 				isText
 					? 'text-white bg-gradient-to-b from-red-400/80 via-red-500/90 to-red-600 hover:from-red-500 hover:to-red-700 hover:bg-gradient-to-t focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80'
 					: 'bg-zinc-100/80 text-zinc-500/80 cursor-not-allowed'
-
 			} ${loading ? 'animate-pulse' : ''}`}
 		>
-			<span>{loading ? <Cog6ToothIcon className="w-5 h-5 animate-spin" /> : 'Summarize'}</span>
+			<span>
+				{loading ? (
+					<Cog6ToothIcon className="w-5 h-5 animate-spin" />
+				) : (
+					label
+				)}
+			</span>
 		</button>
 	)
 }
