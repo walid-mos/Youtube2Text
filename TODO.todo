@@ -1,0 +1,17 @@
+✔ Integrate internationalization to the application @started(23-07-04 23:11) @done(23-07-05 12:24) @lasted(13h13m46s)
+✔ Add a new language to the application @started(23-07-04 23:11) @done(23-07-09 03:55) @lasted(4d4h44m38s)
+✔ Add a language switcher to the application @started(23-07-05 12:24) @done(23-07-09 03:55) @lasted(3d15h31m39s)
+✔ use i18next to translate the application @done(23-07-09 21:31)
+☐ Translate the application to French @started(23-07-11 10:19)
+✔ BUG: Fix server actions not working with StaticParams @done(23-07-11 10:19)
+    => SSG desactivated for the moment in root layout, to be fixed (next-intl + server actions)
+
+
+☐ Download videos from YouTube and convert them to MP3
+☐ Connect the OpenAI API to the application
+    -> Do the calcul on server side 
+    -> Send promise to client side 
+    -> useEffect to update the state of Steps
+☐ Transcribe audio files to text
+☐ Summarize text
+☐ Use langchain to use the data by chunks
