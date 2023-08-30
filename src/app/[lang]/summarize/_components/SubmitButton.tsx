@@ -16,7 +16,11 @@ import {
 
 import { saveLinks } from '../action'
 
-const SubmitButton = () => {
+type Props = {
+	label: string
+}
+
+const SubmitButton: React.FC<Props> = ({ label }) => {
 	const router = useRouter()
 
 	const isText = useAtomValue(isTextAtom)
@@ -60,7 +64,7 @@ const SubmitButton = () => {
 				{loading ? (
 					<Cog6ToothIcon className="w-5 h-5 animate-spin" />
 				) : (
-					'Summarize'
+					label
 				)}
 			</span>
 		</button>

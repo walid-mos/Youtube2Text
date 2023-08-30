@@ -14,7 +14,7 @@ const Head = ({ title, subtitle }: { title: string; subtitle: string }) => {
 
 	return (
 		<>
-			<title>EnvShare</title>
+			<title>YSumAI</title>
 			<meta
 				content="width=device-width, initial-scale=1"
 				name="viewport"

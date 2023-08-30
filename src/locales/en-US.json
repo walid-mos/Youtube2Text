@@ -29,5 +29,31 @@
 			"text": "YSumAI is Open Source on",
 			"name": "GitHub"
 		}
+	},
+	"summarize": {
+		"title": "Summarize your videos",
+		"form": {
+			"paragraph-1": "For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize.",
+			"paragraph-2": "Then wait for the magic to happen. It may take a few minutes depending on the length of the video.",
+			"paragraph-3": "We are working on a way to summarize multiple videos at once. Stay tuned!"
+		},
+		"submit": "Summarize"
+	},
+	"generate": {
+		"title": "Generating...",
+		"timeline": {
+			"preparation": {
+				"title": "Data preparation",
+				"details": "Step details here"
+			},
+			"generation": {
+				"title": "Summary generating",
+				"details": "Step details here"
+			},
+			"done": {
+				"title": "End !",
+				"details": "Step details here"
+			}
+		}
 	}
 }
