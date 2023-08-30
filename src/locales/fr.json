@@ -10,9 +10,9 @@
 			"deployed": {
 				"1": "YSumAI est déployé sur",
 				"2": "et utilise",
-				"3": "pour stocker de facon sécurisé les données"
+				"3": "pour stocker des données cryptées"
 			},
-			"powered": "La technologie AI est fournie par"
+			"powered": "La technologie IA est fournie par"
 		}
 	},
 	"home": {
@@ -21,13 +21,39 @@
 			"2": "Lisez-les plutôt"
 		},
 		"description": {
-			"1": "Notre outil alimenté par l'IA génère automatiquement un résumé de toute vidéo YouTube",
+			"1": "Notre outil basé sur l'IA génère automatiquement un résumé de toute vidéo YouTube",
 			"2": "Collez simplement le lien et obtenez un résumé en quelques secondes"
 		},
-		"button_summarize": "Commencer",
+		"button_summarize": "Commencer le résumé",
 		"github_link": {
 			"text": "YSumAI est Open Source sur",
 			"name": "GitHub"
+		}
+	},
+	"summarize": {
+		"title": "Résumez vos vidéos",
+		"form": {
+			"paragraph-1": "Pour l'instant, vous ne pouvez résumer qu'une seule vidéo YouTube à la fois. ",
+			"paragraph-2": "Attendez ensuite que la magie opère. ",
+			"paragraph-3": "Nous travaillons sur un moyen de résumer plusieurs vidéos à la fois. "
+		},
+		"submit": "Résumer"
+	},
+	"generate": {
+		"title": "Générateur...",
+		"timeline": {
+			"preparation": {
+				"title": "Préparation des données",
+				"details": "Détails de l'étape ici"
+			},
+			"generation": {
+				"title": "Génération de résumé",
+				"details": "Détails de l'étape ici"
+			},
+			"done": {
+				"title": "Fin !",
+				"details": "Détails de l'étape ici"
+			}
 		}
 	}
 }
