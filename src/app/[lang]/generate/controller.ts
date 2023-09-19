@@ -1,29 +1,53 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable arrow-body-style */
-const isFulfilled = <T>(p: PromiseSettledResult<T>): p is PromiseFulfilledResult<T> => p.status === 'fulfilled'
+import OpenAI from 'openai'
+import ytdl from 'ytdl-core'
+import fs from 'fs'
+import { nanoid } from 'nanoid'
 
-const isRejected = <T>(p: PromiseSettledResult<T>): p is PromiseRejectedResult => p.status === 'rejected'
+import { isFulfilled, isRejected } from '@/utils/promises'
 
-const transcriptLink = (link: string) => {
-	return `${link} transcript`
+import type { Transcription } from 'openai/resources/audio/transcriptions'
+
+const openai = new OpenAI({
+	apiKey: process.env.OPENAI_API_KEY,
+})
+
+const downloadVideo = async (link: string, uuid: string) => {
+	return new Promise((resolve, reject) => {
+		const audioStream = fs.createWriteStream(`/tmp/${uuid}.mp3`)
+		ytdl(link, {
+			filter: 'audioonly',
+		}).pipe(audioStream)
+		audioStream.on('finish', () => resolve(true))
+		audioStream.on('error', reject)
+	})
 }
 
-const summarizeVideo = (transcript: string) => {
+const transcriptLink = async (uuid: string) => {
+	const transcript = await openai.audio.transcriptions.create({
+		file: fs.createReadStream(`/tmp/${uuid}.mp3`),
+		model: 'whisper-1',
+	})
+
+	return transcript.text
+}
+
+const summarizeVideo = (transcript: any) => {
 	return `${transcript} summary`
 }
 
 export const handleGenerate = async (links: string[]) => {
 	const promises = await Promise.allSettled(
-		links.map(link => {
-			const transcript = transcriptLink(link)
-			const summary = summarizeVideo(transcript)
-
-			return summary
+		links.map(async link => {
+			const uuid = nanoid()
+			await downloadVideo(link, uuid)
+			const transcript = await transcriptLink(uuid)
+			return summarizeVideo(transcript)
 		}),
 	)
 
-	const errors = promises.filter(isRejected)
-
-	if (errors.length) throw new Error('Something went wrong')
+	if (promises.filter(isRejected).length) throw new Error('Something went wrong')
 
 	return promises.filter(isFulfilled).map(p => p.value)
 }
