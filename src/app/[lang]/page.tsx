@@ -1,14 +1,13 @@
 import Link from 'next/link'
 
-import { useTranslations } from 'next-intl'
+import { getTranslator } from 'next-intl/server'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
 
-// TODO : when next-intl will support SSG, move this to root layout
-// export const generateStaticParams = async () => []
+import type { LangProps } from '@/types/global'
 
-const Home = () => {
-	const t = useTranslations('home')
+const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
+	const t = await getTranslator(lang, 'home')
 
 	return (
 		<div className="flex flex-col items-center justify-center mx-auto sm:px-4 md:px-8 md:max-w-3xl">
