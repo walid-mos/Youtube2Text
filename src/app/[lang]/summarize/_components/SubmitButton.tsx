@@ -15,6 +15,8 @@ type Props = {
 	label: string
 }
 
+// TODO : Broken -> Server action not called because of SSG
+
 const SubmitButton: React.FC<Props> = ({ label }) => {
 	const router = useRouter()
 
@@ -31,7 +33,6 @@ const SubmitButton: React.FC<Props> = ({ label }) => {
 
 	const onClick = async () => {
 		const returnValue = await saveLinks(lines)
-		// console.log(returnValue)
 
 		const { errors, data: links } = returnValue
 		if (errors?.issues.length) {
