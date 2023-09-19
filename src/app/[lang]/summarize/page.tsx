@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 
 import ErrorMessage from '@/components/global/error'
-import Title from '@/components/layout/Title'
+import Title from '@/components/global/Title'
 
 import Form from './_components/Form'
 

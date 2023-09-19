@@ -19,7 +19,7 @@
 		"country-flag-icons": "^1.5.7",
 		"jotai": "^2.4.0",
 		"next": "13.4.19",
-		"next-intl": "3.0.0-beta.12",
+		"next-intl": "3.0.0-beta.18",
 		"postcss": "8.4.28",
 		"radash": "^11.0.0",
 		"react": "^18.2.0",

@@ -6,7 +6,7 @@ import {
 } from 'next-intl'
 import { pick } from 'radash'
 
-import Title from '@/components/layout/Title'
+import Title from '@/components/global/Title'
 
 import Timeline from './_components/Timeline'
 
