@@ -81,5 +81,6 @@ module.exports = {
 		},
 	},
 	darkMode: 'class',
+	// eslint-disable-next-line global-require
 	plugins: [nextui(), require('tailwindcss-animate')],
 }

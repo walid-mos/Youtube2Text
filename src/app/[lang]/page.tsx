@@ -1,12 +1,13 @@
 import Link from 'next/link'
+
 import { Input } from '@nextui-org/input'
 import { getTranslator } from 'next-intl/server'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
-
-import type { LangProps } from '@/types/global'
 import { cn } from '@/utils/classnames'
 import { Button } from '@/components/global/Button'
+
+import type { LangProps } from '@/types/global'
 
 const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 	const t = await getTranslator(lang, 'home')
