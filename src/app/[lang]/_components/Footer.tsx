@@ -22,7 +22,7 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 const Footer: React.FC<Props> = async ({ lang }) => {
 	const t = await getTranslator(lang, 'layout.footer')
 	return (
-		<div className="flex flex-col gap-1 pt-8 text-xs text-center md:px-12 md:mx-12 text-zinc-700 dark:text-zinc-300 max-w-7xl lg:px-8">
+		<div className="gap-1 pt-8 text-xs text-center md:px-12 md:mx-12 text-zinc-700 dark:text-zinc-300 lg:px-8">
 			<p>
 				{t('built')} <ExternalLink href={GITHUB_PROFILE_URL}>walid-mos</ExternalLink>
 			</p>

@@ -10,7 +10,7 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 	const t = await getTranslator(lang, 'home')
 
 	return (
-		<div className="flex flex-col items-center justify-center mx-auto sm:px-4 md:px-8 md:max-w-3xl">
+		<section className="flex flex-col items-center justify-center mx-auto sm:px-4 md:px-8 md:max-w-5xl">
 			<div>
 				<h1 className="py-4 text-3xl font-bold tracking-tight text-center text-transparent sm:text-5xl bg-gradient-to-t bg-clip-text from-zinc-800/70 dark:from-zinc-600/50 to-zinc-400 dark:to-zinc-200 md:text-7xl">
 					{t('title.1')} <br />
@@ -44,12 +44,11 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 				>
 					{t('github_link.text')}{' '}
 					<span className="font-semibold text-zinc-500 dark:text-zinc-200">
-						{t('github_link.name')}{' '}
-						<span aria-hidden="true">&rarr;</span>
+						{t('github_link.name')} <span aria-hidden="true">&rarr;</span>
 					</span>
 				</Link>
 			</div>
-		</div>
+		</section>
 	)
 }
 

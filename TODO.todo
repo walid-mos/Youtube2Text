@@ -7,12 +7,14 @@
     => SSG desactivated for the moment in root layout, to be fixed (next-intl + server actions)
 
 
-☐ Download videos from YouTube and convert them to MP3
-☐ Connect the OpenAI API to the application
+✔ Download videos from YouTube and convert them to MP3 @done(23-09-20 00:32)
+✔ Connect the OpenAI API to the application @done(23-09-20 00:32)
+✔ Transcribe audio files to text @done(23-09-20 00:32)
     -> Do the calcul on server side 
     -> Send promise to client side 
     -> useEffect to update the state of Steps
-☐ Transcribe audio files to text
+☐ Show Pending request one by one to make a timeline 
+    -> try to do it via server components, to be a lot faster
 ☐ Summarize text
 ☐ Use langchain to use the data by chunks
 

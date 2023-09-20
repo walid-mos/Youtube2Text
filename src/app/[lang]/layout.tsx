@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 
 import Analytics from '@/components/misc/Analytics'
 import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
+import { cn } from '@/utils/classnames'
 
 import Header from './_components/Header'
 import Footer from './_components/Footer'
@@ -34,18 +35,20 @@ const RootLayout = ({ children, params: { lang } }: Props) => {
 	}
 
 	return (
-		<html lang={lang} className={inter.className}>
+		<html lang={lang} className={cn(inter.className, 'light')}>
 			<head />
 			<Analytics />
-			<body className="flex flex-col items-center justify-between min-h-screen p-12 bg-slate-50/40 dark:bg-zinc-800">
+			<body>
 				<Providers>
-					<header className="flex w-full px-4 backdrop-blur bh-zinc-900/50">
-						<Header lang={lang} />
-					</header>
-					<main className="flex flex-col w-full gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>
-					<footer className="flex border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
-						<Footer lang={lang} />
-					</footer>
+					<div className="flex flex-col justify-between min-h-screen p-12 bg-slate-50/40 dark:bg-zinc-800">
+						<header className="px-4 backdrop-blur bh-zinc-900/50">
+							<Header lang={lang} />
+						</header>
+						<main className="gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>
+						<footer className="border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
+							<Footer lang={lang} />
+						</footer>
+					</div>
 				</Providers>
 			</body>
 		</html>
