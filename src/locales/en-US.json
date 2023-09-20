@@ -24,6 +24,7 @@
 			"1": "Our AI-powered tool automatically generates a summary of any YouTube video",
 			"2": "Just paste the link and get a summary in seconds"
 		},
+		"link": "Paste your youtube link here",
 		"button_summarize": "Start summarize",
 		"github_link": {
 			"text": "YSumAI is Open Source on",

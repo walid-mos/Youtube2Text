@@ -47,14 +47,6 @@ const Generate: React.FC<Props> = async ({ searchParams, params: { lang } }) => 
 			<Title label={t('title')} className="mb-6 md:mb-12" />
 			<Provider lang={lang}>
 				<Timeline />
-				{results.map(result => (
-					<div
-						key={result}
-						className="flex flex-col items-center justify-center w-full gap-4 mt-8 md:gap-8 md:mt-12"
-					>
-						{result}
-					</div>
-				))}
 			</Provider>
 		</div>
 	)

@@ -38,10 +38,10 @@ const RootLayout = ({ children, params: { lang } }: Props) => {
 		<html lang={lang} className={cn(inter.className, 'light')}>
 			<head />
 			<Analytics />
-			<body>
+			<body className="bg-slate-50/40 dark:bg-zinc-800">
 				<Providers>
-					<div className="flex flex-col justify-between min-h-screen p-12 bg-slate-50/40 dark:bg-zinc-800">
-						<header className="px-4 backdrop-blur bh-zinc-900/50">
+					<div className="flex flex-col justify-between min-h-screen p-6 mx-auto md:p-12 max-w-7xl">
+						<header className="backdrop-blur bh-zinc-900/50">
 							<Header lang={lang} />
 						</header>
 						<main className="gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>

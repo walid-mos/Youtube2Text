@@ -24,6 +24,7 @@
 			"1": "Notre outil basé sur l'IA génère automatiquement un résumé de toute vidéo YouTube",
 			"2": "Collez simplement le lien et obtenez un résumé en quelques secondes"
 		},
+		"link": "Collez votre lien youtube ici",
 		"button_summarize": "Commencer le résumé",
 		"github_link": {
 			"text": "YSumAI est Open Source sur",
