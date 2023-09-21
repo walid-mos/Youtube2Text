@@ -29,7 +29,7 @@ const Header: React.FC<Props> = ({ navigation }) => {
 			</NavbarBrand>
 			<NavbarContent className="hidden gap-4 sm:flex" justify="center">
 				{navigation.map(link => (
-					<NavLink link={link} pathname={pathname} />
+					<NavLink key={link.name} link={link} pathname={pathname} />
 				))}
 			</NavbarContent>
 			<NavbarContent justify="end">
@@ -43,7 +43,7 @@ const Header: React.FC<Props> = ({ navigation }) => {
 			</NavbarContent>
 			<NavbarMenu className="px-12 my-6">
 				{navigation.map(link => (
-					<NavMenuLink link={link} pathname={pathname}>
+					<NavMenuLink key={link.name} link={link} pathname={pathname}>
 						<Link href={link.href} onClick={() => setIsMenuOpen(false)}>
 							{link.name}
 						</Link>

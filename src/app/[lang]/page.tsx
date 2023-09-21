@@ -6,6 +6,9 @@ import { getTranslator } from 'next-intl/server'
 import { GITHUB_REPO_URL } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
 import { Button } from '@/components/global/Button'
+import { NextIcon } from '@/components/icons'
+
+import { onLinkSubmit } from './action'
 
 import type { LangProps } from '@/types/global'
 
@@ -26,22 +29,20 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 				<span className="text-red-600">{t('title.2')}</span>
 			</h1>
 
-			<Input
-				className="max-w-2xl mt-12"
-				classNames={{ input: cn('placeholder:text-center') }}
-				variant="underlined"
-				placeholder={t('link')}
-				autoFocus
-			/>
+			<form action={onLinkSubmit} className="flex flex-col items-center w-full max-w-2xl gap-y-10">
+				<Input
+					name="link"
+					className="mt-12"
+					classNames={{ input: cn('placeholder:text-center') }}
+					variant="underlined"
+					placeholder={t('link')}
+					autoFocus
+				/>
 
-			<Button asChild className="w-full max-w-2xl">
-				<Link href="/summarize">
-					<span>{t('button_summarize')}</span>
-					<span className="ml-2" aria-hidden="true">
-						&rarr;
-					</span>
-				</Link>
-			</Button>
+				<Button type="submit" className="w-full">
+					{t('button_summarize')} <NextIcon />
+				</Button>
+			</form>
 			<div className="mt-6">
 				<p className="text-sm leading-5 text-center sm:text-base text-zinc-600 dark:text-zinc-400">
 					{t('description.1')}. <br />
