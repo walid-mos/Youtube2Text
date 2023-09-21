@@ -6,9 +6,9 @@ import { getTranslator } from 'next-intl/server'
 import { GITHUB_REPO_URL } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
 import { Button } from '@/components/global/Button'
-import { NextIcon } from '@/components/icons'
 
 import { onLinkSubmit } from './action'
+import { SubmitButton } from './_components/SubmitButton'
 
 import type { LangProps } from '@/types/global'
 
@@ -39,9 +39,7 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 					autoFocus
 				/>
 
-				<Button type="submit" className="w-full">
-					{t('button_summarize')} <NextIcon />
-				</Button>
+				<SubmitButton label={t('button_summarize')} waitingLabel={t('button_summarize_waiting')} />
 			</form>
 			<div className="mt-6">
 				<p className="text-sm leading-5 text-center sm:text-base text-zinc-600 dark:text-zinc-400">

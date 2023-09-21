@@ -26,6 +26,7 @@
 		},
 		"link": "Paste your youtube link here",
 		"button_summarize": "Start summarize",
+		"button_summarize_waiting": "Processing Link",
 		"github_link": {
 			"text": "YSumAI is Open Source on",
 			"name": "GitHub"
