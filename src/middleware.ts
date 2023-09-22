@@ -8,6 +8,12 @@ import type { NextRequest } from 'next/server'
 
 // import type { Database } from '@/types/database.types'
 
+const handleI18nRouting = createIntlMiddleware({
+	locales: [...LOCALES],
+	defaultLocale: LOCALE_DEFAULT,
+	localePrefix: 'always',
+})
+
 export async function middleware(request: NextRequest) {
 	// const response = NextResponse.next()
 
@@ -18,12 +24,6 @@ export async function middleware(request: NextRequest) {
 
 	// ------------------------------
 	// Internationalization middleware
-
-	const handleI18nRouting = createIntlMiddleware({
-		locales: [...LOCALES],
-		defaultLocale: LOCALE_DEFAULT,
-		localePrefix: 'always',
-	})
 	const response = handleI18nRouting(request)
 
 	// Step 3: Alter the response
