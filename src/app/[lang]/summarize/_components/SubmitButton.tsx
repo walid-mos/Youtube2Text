@@ -7,12 +7,7 @@ import { useEffect, useTransition } from 'react'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
-import {
-	linesAtom,
-	isTextAtom,
-	loadingAtom,
-	errorMessageAtom,
-} from '@/atoms/summarize'
+import { linesAtom, isTextAtom, loadingAtom, errorMessageAtom } from '@/atoms/summarize'
 
 import { saveLinks } from '../action'
 
@@ -60,13 +55,7 @@ const SubmitButton: React.FC<Props> = ({ label }) => {
 					: 'bg-zinc-100/80 text-zinc-500/80 cursor-not-allowed'
 			} ${loading ? 'animate-pulse' : ''}`}
 		>
-			<span>
-				{loading ? (
-					<Cog6ToothIcon className="w-5 h-5 animate-spin" />
-				) : (
-					label
-				)}
-			</span>
+			<span>{loading ? <Cog6ToothIcon className="w-5 h-5 animate-spin" /> : label}</span>
 		</button>
 	)
 }
