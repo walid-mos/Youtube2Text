@@ -1,7 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { isString } from 'radash'
@@ -16,10 +16,21 @@ export const onLinkSubmit = async (formData: FormData) => {
 	}
 
 	await new Promise(resolve => {
-		const supabase = createServerActionClient<Database>({ cookies })
-		supabase.from('queries').insert([{ link }])
+		const supabase = createServerActionClient<Database>({ cookies }, { options: { db: { schema: 'links' } } })
+		supabase
+			.from('queries')
+			.insert([{ link }])
+			.select()
+			.limit(1)
+			.single()
+			.then(({ data }) => {
+				if (!data) throw new Error('')
+
+				supabase.from('links.process_step').insert([{ link_id: data.id }])
+			})
+
 		setTimeout(resolve, 1500)
 	})
 
-	revalidatePath('/')
+	redirect(`/summarize/?${new URLSearchParams([['link', link]])}`)
 }
