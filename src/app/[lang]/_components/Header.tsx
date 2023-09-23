@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarContent, NavbarItem } from '@nextui-org/navbar'
 import { useAtom } from 'jotai'
 
-import { Button } from '@/components/global/Button'
+import { Button } from '@/components/ui/Button'
 import { isMenuOpenAtom } from '@/atoms/layout'
 import { getPathname } from '@/utils/paths'
 
