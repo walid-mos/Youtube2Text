@@ -6,7 +6,6 @@
 ✔ BUG: Fix server actions not working with StaticParams @done(23-07-11 10:19)
     => SSG desactivated for the moment in root layout, to be fixed (next-intl + server actions)
 
-
 ✔ Download videos from YouTube and convert them to MP3 @done(23-09-20 00:32)
 ✔ Connect the OpenAI API to the application @done(23-09-20 00:32)
 ✔ Transcribe audio files to text @done(23-09-20 00:32)
@@ -19,4 +18,21 @@
 ☐ Use langchain to use the data by chunks
 
 Refactor : 
-☐ Use NextUI for the navbar
+✔ Use NextUI for the navbar @done(23-09-24 14:16)
+✔ Refactor Home page @done(23-09-24 14:16)
+✔ Refactor Header @done(23-09-24 14:17)
+✔ Refactor Footer @done(23-09-24 14:17)
+✔ Add Server Action from Home Page @done(23-09-24 14:17)
+Inside server components
+☐ Summarize Page
+    ☐ Download loading
+    ☐ Transcribe loading
+    ☐ Summarize loading
+☐ Result page
+    ☐ Get result page
+    ☐ Start Again action
+☐ Authentication
+    ☐ Login / Signup Modal
+    ☐ Add authenticated menu
+    ☐ Limit authenticated page 
+    ☐ Limit generation if not authenticated

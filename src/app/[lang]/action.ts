@@ -8,6 +8,14 @@ import { isString } from 'radash'
 
 import type { Database } from '@/types/database.types'
 
+const supabaseOptions = {
+	options: {
+		db: {
+			schema: 'links',
+		},
+	},
+} as const
+
 export const onLinkSubmit = async (formData: FormData) => {
 	const link = formData.get('link')
 
@@ -15,20 +23,20 @@ export const onLinkSubmit = async (formData: FormData) => {
 		throw new Error('Error with link')
 	}
 
+	const supabase = createServerActionClient<Database>({ cookies }, supabaseOptions)
+
+	const { data, error: linkError } = await supabase.from('queries').insert([{ link }]).select().limit(1).single()
+
+	if (!data) throw new Error(linkError.message)
+
+	const { error: processError } = await supabase
+		.from('process_step')
+		.insert([{ link_id: data.id }])
+		.select()
+
+	if (processError?.message) throw new Error(processError.message)
+
 	await new Promise(resolve => {
-		const supabase = createServerActionClient<Database>({ cookies }, { options: { db: { schema: 'links' } } })
-		supabase
-			.from('queries')
-			.insert([{ link }])
-			.select()
-			.limit(1)
-			.single()
-			.then(({ data }) => {
-				if (!data) throw new Error('')
-
-				supabase.from('links.process_step').insert([{ link_id: data.id }])
-			})
-
 		setTimeout(resolve, 1500)
 	})
 
