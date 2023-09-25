@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/Button'
 import { isMenuOpenAtom } from '@/atoms/layout'
 import { getPathname } from '@/utils/paths'
 
-import Logo from './Header/Logo'
-import { NavLink, NavMenuLink } from './Header/NavLink'
+import Logo from './Logo'
+import { NavLink, NavMenuLink } from './NavLink'
 
 import type { NavigationLinks } from '@/app/controller'
 

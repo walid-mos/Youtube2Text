@@ -7,7 +7,7 @@ import { getTranslator } from 'next-intl/server'
 import { GITHUB_PROFILE_URL, LOCALES, type LOCALES_TYPE } from '@/utils/constants'
 import { Separator } from '@/components/ui/Separator'
 
-import LangItem from './Footer/LangItem'
+import LangItem from './LangItem'
 
 type Props = {
 	lang: LOCALES_TYPE
