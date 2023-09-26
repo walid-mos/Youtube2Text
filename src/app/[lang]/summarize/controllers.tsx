@@ -6,11 +6,7 @@ export const getLinkYoutubeInfos = async (link: string) => {
 	if (!linkFetched) throw new Error('An error happened fetching videos infos')
 
 	const {
-		videoDetails: {
-			title,
-			lengthSeconds,
-			thumbnail: { thumbnails },
-		},
+		videoDetails: { title, lengthSeconds, thumbnails },
 	} = linkFetched
 
 	const thumbnail = thumbnails.filter(t => t.width < 1000).sort((a, b) => b.width - a.width)[0]
