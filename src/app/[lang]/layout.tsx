@@ -8,7 +8,6 @@ import { cn } from '@/utils/classnames'
 import Header from './_components/Header'
 import Footer from './_components/Footer'
 import Providers from './providers'
-import { getNavigationLinks } from './controller'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,7 +42,7 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 				<Providers>
 					<div className="flex flex-col justify-between min-h-screen p-6 mx-auto md:p-12 max-w-7xl">
 						<header className="backdrop-blur bh-zinc-900/50">
-							<Header navigation={await getNavigationLinks(lang)} />
+							<Header />
 						</header>
 						<main className="gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>
 						<footer className="border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
