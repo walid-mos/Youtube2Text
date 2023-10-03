@@ -5,27 +5,33 @@ import Title from '@/components/global/Title'
 import StepDownload from './_components/StepDownload'
 import StepTranscript from './_components/StepTranscript'
 import StepSummarize from './_components/StepSummarize'
+import { getProcessStep, stepsGenerator } from './controllers'
+import VideoData from './_components/VideoData'
 
 import type { LangProps } from '@/types/global'
 
 type Props = {
 	searchParams: {
-		link: string
+		uuid: string
 	}
 } & LangProps
 
-const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: { link } }) => {
+const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: { uuid } }) => {
 	const t = await getTranslator(lang, 'summarize')
 
+	const processStep = await getProcessStep(uuid)
+	const steps = stepsGenerator(processStep)
+
 	return (
-		<div className="w-full mt-8 md:mb-16 lg:mb-32">
-			<Title label={t('title')} />
-			<div className="mt-12 md:flex md:flex-col md:items-center ">
-				<StepDownload link={link} />
-				<StepTranscript />
-				<StepSummarize />
+		<section>
+			<Title label={t('title')} className="flex-shrink" />
+			<VideoData link={processStep.queries.link} />
+			<div className="grid grid-cols-3 gap-x-6">
+				<StepDownload downloadVideoPromise={steps.next()} />
+				<StepTranscript transcriptVideoPromise={steps.next()} />
+				<StepSummarize summarizeVideoPromise={steps.next()} />
 			</div>
-		</div>
+		</section>
 	)
 }
 
