@@ -16,7 +16,7 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 	const t = await getTranslator(lang, 'home')
 
 	return (
-		<section className="flex flex-col items-center gap-y-10 sm:px-4">
+		<section className="grid justify-items-center place-content-center gap-y-10 sm:px-4">
 			<h1
 				className={cn(
 					'text-transparent bg-gradient-to-t bg-clip-text from-zinc-800/70 to-zinc-400',

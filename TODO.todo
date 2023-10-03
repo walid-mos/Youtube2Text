@@ -24,6 +24,7 @@ Refactor :
 ✔ Refactor Footer @done(23-09-24 14:17)
 ✔ Add Server Action from Home Page @done(23-09-24 14:17)
 Inside server components
+✔ Fetch Youtube data and show it @done(23-09-26 14:59)
 ☐ Summarize Page
     ☐ Download loading
     ☐ Transcribe loading

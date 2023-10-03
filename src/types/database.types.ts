@@ -48,16 +48,19 @@ export interface Database {
           created_at: string
           id: number
           link: string
+          uuid: string
         }
         Insert: {
           created_at?: string
           id?: number
           link: string
+          uuid?: string
         }
         Update: {
           created_at?: string
           id?: number
           link?: string
+          uuid?: string
         }
         Relationships: []
       }

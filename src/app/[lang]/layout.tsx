@@ -44,7 +44,7 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 						<header className="backdrop-blur bh-zinc-900/50">
 							<Header />
 						</header>
-						<main className="gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>
+						<main className="grid flex-grow my-4 md:my-8 lg:my-14">{children}</main>
 						<footer className="border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
 							<Footer lang={lang} />
 						</footer>

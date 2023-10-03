@@ -5,16 +5,11 @@ import { redirect } from 'next/navigation'
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { isString } from 'radash'
+import { nanoid } from 'nanoid'
+
+import { supabaseOptionsLinksSchema } from '@/supabase/shemasOptions'
 
 import type { Database } from '@/types/database.types'
-
-const supabaseOptions = {
-	options: {
-		db: {
-			schema: 'links',
-		},
-	},
-} as const
 
 export const onLinkSubmit = async (formData: FormData) => {
 	const link = formData.get('link')
@@ -23,9 +18,15 @@ export const onLinkSubmit = async (formData: FormData) => {
 		throw new Error('Error with link')
 	}
 
-	const supabase = createServerActionClient<Database>({ cookies }, supabaseOptions)
+	const supabase = createServerActionClient<Database>({ cookies }, supabaseOptionsLinksSchema)
 
-	const { data, error: linkError } = await supabase.from('queries').insert([{ link }]).select().limit(1).single()
+	const uuid = nanoid()
+	const { data, error: linkError } = await supabase
+		.from('queries')
+		.insert([{ link, uuid }])
+		.select()
+		.limit(1)
+		.single()
 
 	if (!data) throw new Error(linkError.message)
 
@@ -40,5 +41,5 @@ export const onLinkSubmit = async (formData: FormData) => {
 		setTimeout(resolve, 1500)
 	})
 
-	redirect(`/summarize/?${new URLSearchParams([['link', link]])}`)
+	redirect(`/summarize/?${new URLSearchParams([['uuid', uuid]])}`)
 }
