@@ -23,10 +23,10 @@ const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: 
 	const steps = stepsGenerator(processStep)
 
 	return (
-		<section>
+		<section className="grid gap-6 auto-rows-[min-content_min-content_1fr] place-items-center">
 			<Title label={t('title')} className="flex-shrink" />
 			<VideoData link={processStep.queries.link} />
-			<div className="grid grid-cols-3 gap-x-6">
+			<div className="grid w-full grid-cols-3 gap-x-6">
 				<StepDownload downloadVideoPromise={steps.next()} />
 				<StepTranscript transcriptVideoPromise={steps.next()} />
 				<StepSummarize summarizeVideoPromise={steps.next()} />
