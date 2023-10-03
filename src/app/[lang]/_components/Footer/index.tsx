@@ -1,17 +1,14 @@
 import Link from 'next/link'
 
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
 import { getTranslator } from 'next-intl/server'
 
-import { GITHUB_PROFILE_URL, LOCALES, type LOCALES_TYPE } from '@/utils/constants'
+import { GITHUB_PROFILE_URL, LOCALES } from '@/utils/constants'
 import { Separator } from '@/components/ui/Separator'
+import { getServerLocale } from '@/utils/locale'
 
 import LangItem from './LangItem'
-
-type Props = {
-	lang: LOCALES_TYPE
-}
 
 type ExternalLinkProps = {
 	href: string
@@ -24,7 +21,8 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 	</Link>
 )
 
-const Footer: React.FC<Props> = async ({ lang }) => {
+const Footer = async () => {
+	const lang = getServerLocale()
 	const t = await getTranslator(lang, 'layout.footer')
 
 	return (
@@ -42,7 +40,7 @@ const Footer: React.FC<Props> = async ({ lang }) => {
 			<div className="flex items-center justify-center h-5 my-3">
 				{LOCALES.map((locale, index) => (
 					<Fragment key={locale}>
-						<LangItem lang={locale} />
+						<LangItem itemLocale={locale} />
 						{index < LOCALES.length - 1 && <Separator orientation="vertical" />}
 					</Fragment>
 				))}

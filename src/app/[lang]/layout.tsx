@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Analytics from '@/components/misc/Analytics'
 import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
+import { setServerLocale } from '@/utils/locale'
 
 import Header from './_components/Header'
 import Footer from './_components/Footer'
@@ -34,6 +35,8 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 		throw new Error(`Unsupported locale: ${lang}`)
 	}
 
+	setServerLocale(lang)
+
 	return (
 		<html lang={lang} className={cn(inter.className, 'light')}>
 			<head />
@@ -46,7 +49,7 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 						</header>
 						<main className="grid flex-grow my-4 md:my-8 lg:my-14">{children}</main>
 						<footer className="border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
-							<Footer lang={lang} />
+							<Footer />
 						</footer>
 					</div>
 				</Providers>

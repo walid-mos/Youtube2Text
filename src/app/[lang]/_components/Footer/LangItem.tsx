@@ -1,22 +1,19 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-import { switchLanguage } from '@/utils/paths'
+import { useSwitchLanguage } from '@/utils/paths'
 import { Button } from '@/components/ui/Button'
 import { LOCALES_NAMES, type LOCALES_TYPE } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
 
 type LangItemProps = {
-	lang: LOCALES_TYPE
+	itemLocale: LOCALES_TYPE
 }
 
-const LangItem: React.FC<LangItemProps> = ({ lang }) => {
-	const pathname = usePathname()
-	if (!pathname) throw new Error("Couldn't find the path of the page.")
-	const [href, oldLang] = switchLanguage(pathname, lang)
-	const isActualLanguage = oldLang === lang
+const LangItem: React.FC<LangItemProps> = ({ itemLocale }) => {
+	const [href, oldLang] = useSwitchLanguage(itemLocale)
+	const isActualLanguage = oldLang === itemLocale
 
 	return (
 		<Button
@@ -29,7 +26,7 @@ const LangItem: React.FC<LangItemProps> = ({ lang }) => {
 			)}
 			disabled={isActualLanguage}
 		>
-			<Link href={href}>{LOCALES_NAMES.get(lang)}</Link>
+			<Link href={href}>{LOCALES_NAMES.get(itemLocale)}</Link>
 		</Button>
 	)
 }
