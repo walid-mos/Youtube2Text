@@ -45,9 +45,9 @@ export const getLinkYoutubeInfos = async (link: string) => {
 	return { title, videoLength, thumbnail }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const downloadVideo = async (link: string, uuid: string): Promise<boolean> =>
 	new Promise(resolve => {
-		console.log(uuid)
 		setTimeout(resolve, 4000)
 	})
 // new Promise((resolve, reject) => {

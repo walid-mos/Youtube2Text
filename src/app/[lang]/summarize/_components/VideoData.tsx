@@ -17,6 +17,7 @@ const VideoData: React.FC<Props> = async ({ link }) => {
 					width={youtubeData.thumbnail.width}
 					height={youtubeData.thumbnail.height}
 					alt={youtubeData.title}
+					priority
 				/>
 			</div>
 			<div className="flex flex-col justify-between h-full text-right">

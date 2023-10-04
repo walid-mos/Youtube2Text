@@ -1,12 +1,11 @@
 import { getTranslator } from 'next-intl/server'
 
 import Title from '@/components/global/Title'
+import NextIntlProvider from '@/components/global/NextIntlProvider'
 
-import StepDownload from './_components/StepDownload'
-import StepTranscript from './_components/StepTranscript'
-import StepSummarize from './_components/StepSummarize'
 import { getProcessStep, stepsGenerator } from './controllers'
 import VideoData from './_components/VideoData'
+import Step from './_components/Step'
 
 import type { LangProps } from '@/types/global'
 
@@ -27,9 +26,23 @@ const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: 
 			<Title label={t('title')} className="flex-shrink" />
 			<VideoData link={processStep.queries.link} />
 			<div className="grid w-full grid-cols-3 gap-x-6">
-				<StepDownload downloadVideoPromise={steps.next()} />
-				<StepTranscript transcriptVideoPromise={steps.next()} />
-				<StepSummarize summarizeVideoPromise={steps.next()} />
+				<NextIntlProvider pick={['summarize']}>
+					<Step
+						promise={steps.next()}
+						label={t('steps.download.title')}
+						description={t('steps.download.details')}
+					/>
+					<Step
+						promise={steps.next()}
+						label={t('steps.transcribe.title')}
+						description={t('steps.transcribe.details')}
+					/>
+					<Step
+						promise={steps.next()}
+						label={t('steps.summarize.title')}
+						description={t('steps.summarize.details')}
+					/>
+				</NextIntlProvider>
 			</div>
 		</section>
 	)

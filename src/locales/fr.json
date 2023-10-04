@@ -34,6 +34,21 @@
 	},
 	"summarize": {
 		"title": "Résumez vos vidéos",
+		"steps": {
+			"download": {
+				"title": "Préparation des données",
+				"details": "Détails de l'étape ici"
+			},
+			"transcribe": {
+				"title": "Génération de résumé",
+				"details": "Détails de l'étape ici"
+			},
+			"summarize": {
+				"title": "Finalisation",
+				"details": "Détails de l'étape ici"
+			},
+			"loading": "En chargement ..."
+		},
 		"form": {
 			"paragraph-1": "Pour l'instant, vous ne pouvez résumer qu'une seule vidéo YouTube à la fois. ",
 			"paragraph-2": "Attendez ensuite que la magie opère. ",
