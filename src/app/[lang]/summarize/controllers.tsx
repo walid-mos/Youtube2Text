@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 
-// import fs from 'fs'
+import OpenAI from 'openai'
+import fs from 'fs'
 import ytdl from 'ytdl-core'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
@@ -8,8 +9,13 @@ import { supabaseOptionsLinksSchema } from '@/supabase/shemasOptions'
 
 import type { Database } from '@/types/database.types'
 
+const openai = new OpenAI({
+	apiKey: process.env.OPENAI_API_KEY,
+})
+
 export const getProcessStep = async (uuid: string) => {
 	const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
+
 	const { data, error } = await supabase
 		.from('process_step')
 		.select(`*, queries!inner(*)`)
@@ -46,26 +52,74 @@ export const getLinkYoutubeInfos = async (link: string) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const downloadVideo = async (link: string, uuid: string): Promise<boolean> =>
-	new Promise(resolve => {
-		setTimeout(resolve, 4000)
+export const downloadVideo = async (link: string, uuid: string) =>
+	new Promise((resolve, reject) => {
+		const audioStream = fs.createWriteStream(`/tmp/${uuid}.mp3`)
+		ytdl(link, {
+			filter: 'audioonly',
+		}).pipe(audioStream)
+		audioStream.on('finish', () => resolve(true))
+		audioStream.on('error', reject)
 	})
-// new Promise((resolve, reject) => {
-// 	const audioStream = fs.createWriteStream(`/tmp/${uuid}.mp3`)
-// 	ytdl(link, {
-// 		filter: 'audioonly',
-// 	}).pipe(audioStream)
-// 	audioStream.on('finish', () => resolve(true))
-// 	audioStream.on('error', reject)
-// })
 
-export type DownloadVideoType = ReturnType<typeof downloadVideo>
+const transcriptLink = async (processStepId: number, uuid: string) =>
+	new Promise(resolve => {
+		const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
+		supabase
+			.from('process_step')
+			.select(`transcript, queries!inner(*)`)
+			.eq('queries.uuid', uuid)
+			.limit(1)
+			.single()
+			.then(({ data }) => {
+				if (data?.transcript) return resolve(true)
+
+				return openai.audio.transcriptions
+					.create({
+						file: fs.createReadStream(`/tmp/${uuid}.mp3`),
+						model: 'whisper-1',
+					})
+					.then(transcript => {
+						supabase
+							.from('process_step')
+							.update({
+								transcript: transcript.text,
+							})
+							.eq('id', processStepId)
+							.then(() => {
+								resolve(true)
+							})
+					})
+			})
+	})
+
+const summarizeVideo = (uuid: string) =>
+	new Promise(resolve => {
+		const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
+		supabase
+			.from('process_step')
+			.select(`transcript, queries!inner(*)`)
+			.eq('queries.uuid', uuid)
+			.limit(1)
+			.single()
+			.then(({ data }) => {
+				// TODO: Handle better error
+				if (!data) throw new Error('Error')
+				console.log('summary', `${data.transcript} summary`)
+				resolve(`${data.transcript} summary`)
+			})
+	})
+
+// export const testPromise = async (): Promise<boolean> =>
+// 	new Promise(resolve => {
+// 		setTimeout(resolve, 4000)
+// 	})
 
 export async function* stepsGenerator(processStep: ProcessStepType) {
-	yield await downloadVideo(processStep.queries.link, processStep.queries.uuid)
-	yield await downloadVideo(processStep.queries.link, processStep.queries.uuid)
-	yield await downloadVideo(processStep.queries.link, processStep.queries.uuid)
+	const { link, uuid } = processStep.queries
+	yield await downloadVideo(link, uuid)
+	yield await transcriptLink(processStep.id, uuid)
+	yield await summarizeVideo(uuid)
 }
 
-export type StepsGeneratorType = ReturnType<typeof stepsGenerator>
-export type StepsPromiseType = Promise<IteratorResult<boolean, void>>
+export type StepsPromiseType = Promise<IteratorResult<unknown, void>>
