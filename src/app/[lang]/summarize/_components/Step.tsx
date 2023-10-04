@@ -69,10 +69,23 @@ const Status: React.FC<Props> = ({ promise, label, description }) => {
 							}}
 							aria-label="loading"
 						/>
-						<span aria-label="loading">{t('loading')}</span>
+						<span>{t('loading')}</span>
 					</>
 				) : (
-					'Success'
+					<>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={2}
+							stroke="currentColor"
+							className="w-12 h-12 stroke-green-500 drop-shadow-md"
+						>
+							<path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+						</svg>
+
+						<span>{t('success')}</span>
+					</>
 				)}
 			</div>
 		</Skeleton>

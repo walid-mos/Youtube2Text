@@ -47,7 +47,8 @@
 				"title": "Finalisation",
 				"details": "Détails de l'étape ici"
 			},
-			"loading": "En chargement ..."
+			"loading": "En chargement ...",
+			"success": "Terminé !"
 		},
 		"form": {
 			"paragraph-1": "Pour l'instant, vous ne pouvez résumer qu'une seule vidéo YouTube à la fois. ",
