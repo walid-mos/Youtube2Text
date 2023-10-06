@@ -1,35 +1,21 @@
-import { cookies } from 'next/headers'
-
 import OpenAI from 'openai'
 import fs from 'fs'
 import ytdl from 'ytdl-core'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
-import { supabaseOptionsLinksSchema } from '@/supabase/shemasOptions'
-
-import type { Database } from '@/types/database.types'
+import { ProcessStepType, getProcessStepByUUID, setProcessStepData } from '@/supabase/functions/processLink'
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 })
 
 export const getProcessStep = async (uuid: string) => {
-	const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
+	const processStep = await getProcessStepByUUID(uuid)
 
-	const { data, error } = await supabase
-		.from('process_step')
-		.select(`*, queries!inner(*)`)
-		.eq('queries.uuid', uuid)
-		.limit(1)
-		.single()
+	// TODO: Handle better error
+	if (!processStep) throw new Error('Could not find Process Step')
 
-	if (error) throw new Error(`An error occured while fetching Process Step table : ${error.message}`)
-	if (!data.queries || !data) throw new Error('An error occured while fetching the data.')
-
-	return { ...data, queries: data.queries }
+	return processStep
 }
-
-export type ProcessStepType = Awaited<ReturnType<typeof getProcessStep>>
 
 export const getLinkYoutubeInfos = async (link: string) => {
 	const linkFetched = await ytdl.getBasicInfo(link)
@@ -62,53 +48,32 @@ export const downloadVideo = async (link: string, uuid: string) =>
 		audioStream.on('error', reject)
 	})
 
-const transcriptLink = async (processStepId: number, uuid: string) =>
-	new Promise(resolve => {
-		const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
-		supabase
-			.from('process_step')
-			.select(`transcript, queries!inner(*)`)
-			.eq('queries.uuid', uuid)
-			.limit(1)
-			.single()
-			.then(({ data }) => {
-				if (data?.transcript) return resolve(true)
+const transcriptLink = async (processStepId: number, uuid: string) => {
+	const data = await getProcessStepByUUID(uuid)
 
-				return openai.audio.transcriptions
-					.create({
-						file: fs.createReadStream(`/tmp/${uuid}.mp3`),
-						model: 'whisper-1',
-					})
-					.then(transcript => {
-						supabase
-							.from('process_step')
-							.update({
-								transcript: transcript.text,
-							})
-							.eq('id', processStepId)
-							.then(() => {
-								resolve(true)
-							})
-					})
-			})
+	if (data?.transcript) return data.transcript
+
+	const transcript = await openai.audio.transcriptions.create({
+		file: fs.createReadStream(`/tmp/${uuid}.mp3`),
+		model: 'whisper-1',
 	})
 
-const summarizeVideo = (uuid: string) =>
-	new Promise(resolve => {
-		const supabase = createServerComponentClient<Database>({ cookies }, supabaseOptionsLinksSchema)
-		supabase
-			.from('process_step')
-			.select(`transcript, queries!inner(*)`)
-			.eq('queries.uuid', uuid)
-			.limit(1)
-			.single()
-			.then(({ data }) => {
-				// TODO: Handle better error
-				if (!data) throw new Error('Error')
-				console.log('summary', `${data.transcript} summary`)
-				resolve(`${data.transcript} summary`)
-			})
-	})
+	await setProcessStepData(processStepId, { transcript: transcript.text })
+
+	return transcript.text
+}
+
+const summarizeVideo = async (transcript: string, processStepId: number, uuid: string) => {
+	const data = await getProcessStepByUUID(uuid)
+
+	if (data?.summary) return data.summary
+
+	const summary = { text: 'test' }
+
+	await setProcessStepData(processStepId, { summary: summary.text })
+
+	return `${transcript} summary`
+}
 
 // export const testPromise = async (): Promise<boolean> =>
 // 	new Promise(resolve => {
@@ -118,8 +83,11 @@ const summarizeVideo = (uuid: string) =>
 export async function* stepsGenerator(processStep: ProcessStepType) {
 	const { link, uuid } = processStep.queries
 	yield await downloadVideo(link, uuid)
-	yield await transcriptLink(processStep.id, uuid)
-	yield await summarizeVideo(uuid)
+	const transcript = await transcriptLink(processStep.id, uuid)
+	yield transcript
+	const summary = await summarizeVideo(transcript, processStep.id, uuid)
+	yield summary
+	return summary
 }
 
-export type StepsPromiseType = Promise<IteratorResult<unknown, void>>
+export type StepsPromiseType = Promise<IteratorResult<unknown, string>>
