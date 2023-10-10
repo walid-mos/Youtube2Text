@@ -53,14 +53,16 @@ const transcriptLink = async (processStepId: number, uuid: string) => {
 
 	if (data?.transcript) return data.transcript
 
-	const transcript = await openai.audio.transcriptions.create({
-		file: fs.createReadStream(`/tmp/${uuid}.mp3`),
-		model: 'whisper-1',
-	})
+	const transcript = (
+		await openai.audio.transcriptions.create({
+			file: fs.createReadStream(`/tmp/${uuid}.mp3`),
+			model: 'whisper-1',
+		})
+	).text
 
-	await setProcessStepData(processStepId, { transcript: transcript.text })
+	await setProcessStepData(processStepId, { transcript })
 
-	return transcript.text
+	return transcript
 }
 
 const summarizeVideo = async (transcript: string, processStepId: number, uuid: string) => {
@@ -90,4 +92,4 @@ export async function* stepsGenerator(processStep: ProcessStepType) {
 	return summary
 }
 
-export type StepsPromiseType = Promise<IteratorResult<unknown, string>>
+export type StepsGeneratorType = ReturnType<ReturnType<typeof stepsGenerator>['next']>

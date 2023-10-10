@@ -4,9 +4,7 @@ const Head = ({ title, subtitle }: { title: string; subtitle: string }) => {
 	title ??= 'Share Environment Variables Securely'
 	subtitle ??= 'EnvShare'
 
-	const baseUrl = process.env.VERCEL_URL
-		? `https://${process.env.VERCEL_URL}`
-		: 'http://localhost:3000'
+	const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
 
 	//   const url = new URL("/api/v1/og", baseUrl);
 	//   url.searchParams.set("title", title);
@@ -15,17 +13,11 @@ const Head = ({ title, subtitle }: { title: string; subtitle: string }) => {
 	return (
 		<>
 			<title>YSumAI</title>
-			<meta
-				content="width=device-width, initial-scale=1"
-				name="viewport"
-			/>
+			<meta content="width=device-width, initial-scale=1" name="viewport" />
 			<meta name="description" content={subtitle} />
 			<meta name="theme-color" content="#000000" />
 			<meta name="title" content={title} />
-			<meta
-				name="keywords"
-				content="envshare, secure, secrets, share, environment, variables"
-			/>
+			<meta name="keywords" content="envshare, secure, secrets, share, environment, variables" />
 			<meta name="language" content="English" />
 			<meta name="revisit-after" content="7 days" />
 			<meta name="robots" content="all" />

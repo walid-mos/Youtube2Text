@@ -5,15 +5,18 @@ import { useEffect, useState } from 'react'
 import { Card, CardBody } from '@nextui-org/card'
 import { CircularProgress } from '@nextui-org/progress'
 import { useTranslations } from 'next-intl'
+import { useAtom } from 'jotai'
 
 import { cn } from '@/utils/classnames'
+import { currentPromiseAtom } from '@/atoms/summarize'
 
-import type { StepsPromiseType } from '../controllers'
+import type { StepsGeneratorType } from '../controllers'
 
 type Props = {
 	label: string
 	description: string
-	promise: StepsPromiseType
+	number: 1 | 2 | 3
+	promise: StepsGeneratorType
 }
 
 type SkeletonProps = {
@@ -29,12 +32,17 @@ const Skeleton: React.FC<SkeletonProps> = ({ children, className }) => (
 	</Card>
 )
 
-const Status: React.FC<Props> = ({ promise, label, description }) => {
+const Status: React.FC<Props> = ({ promise, label, description, number }) => {
 	const [isPending, setIsPending] = useState<boolean>(true)
+	const [currentPromise, setCurrentPromise] = useAtom(currentPromiseAtom)
 	const t = useTranslations('summarize.steps')
 
 	useEffect(() => {
-		promise.then(() => setIsPending(false))
+		promise.then(({ value }) => {
+			console.log(value)
+			setIsPending(false)
+			setCurrentPromise(number)
+		})
 	}, [])
 
 	return (
@@ -53,7 +61,7 @@ const Status: React.FC<Props> = ({ promise, label, description }) => {
 		>
 			<div className="text-center">
 				<div className={cn('text-xl font-bold', isPending ? 'text-blue-600/80' : 'text-green-600/80')}>
-					{label}
+					{label} - {currentPromise}
 				</div>
 				<div className="text-small">{description}</div>
 			</div>
