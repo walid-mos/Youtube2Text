@@ -77,19 +77,16 @@ const summarizeVideo = async (transcript: string, processStepId: number, uuid: s
 	return `${transcript} summary`
 }
 
-// export const testPromise = async (): Promise<boolean> =>
-// 	new Promise(resolve => {
-// 		setTimeout(resolve, 4000)
-// 	})
-
 export async function* stepsGenerator(processStep: ProcessStepType) {
 	const { link, uuid } = processStep.queries
-	yield await downloadVideo(link, uuid)
+	await downloadVideo(link, uuid)
+	yield 1
+
 	const transcript = await transcriptLink(processStep.id, uuid)
-	yield transcript
-	const summary = await summarizeVideo(transcript, processStep.id, uuid)
-	yield summary
-	return summary
+	yield 2
+
+	await summarizeVideo(transcript, processStep.id, uuid)
+	yield 3
 }
 
-export type StepsGeneratorType = ReturnType<ReturnType<typeof stepsGenerator>['next']>
+export type StepPromiseType = ReturnType<ReturnType<typeof stepsGenerator>['next']>

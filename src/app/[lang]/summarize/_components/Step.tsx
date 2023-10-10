@@ -10,13 +10,12 @@ import { useAtom } from 'jotai'
 import { cn } from '@/utils/classnames'
 import { currentPromiseAtom } from '@/atoms/summarize'
 
-import type { StepsGeneratorType } from '../controllers'
+import type { StepPromiseType } from '../controllers'
 
 type Props = {
 	label: string
 	description: string
-	number: 1 | 2 | 3
-	promise: StepsGeneratorType
+	promise: StepPromiseType
 }
 
 type SkeletonProps = {
@@ -32,16 +31,16 @@ const Skeleton: React.FC<SkeletonProps> = ({ children, className }) => (
 	</Card>
 )
 
-const Status: React.FC<Props> = ({ promise, label, description, number }) => {
+const Status: React.FC<Props> = ({ promise, label, description }) => {
 	const [isPending, setIsPending] = useState<boolean>(true)
 	const [currentPromise, setCurrentPromise] = useAtom(currentPromiseAtom)
 	const t = useTranslations('summarize.steps')
 
 	useEffect(() => {
 		promise.then(({ value }) => {
-			console.log(value)
+			if (value === undefined) return
 			setIsPending(false)
-			setCurrentPromise(number)
+			setCurrentPromise(value)
 		})
 	}, [])
 

@@ -6,6 +6,7 @@ import NextIntlProvider from '@/components/global/NextIntlProvider'
 import { getProcessStep, stepsGenerator } from './controllers'
 import VideoData from './_components/VideoData'
 import Step from './_components/Step'
+import Submit from './_components/Submit'
 
 import type { LangProps } from '@/types/global'
 
@@ -22,17 +23,14 @@ const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: 
 		{
 			label: t('steps.download.title'),
 			description: t('steps.download.details'),
-			number: 1,
 		},
 		{
 			label: t('steps.transcribe.title'),
 			description: t('steps.transcribe.details'),
-			number: 2,
 		},
 		{
 			label: t('steps.summarize.title'),
 			description: t('steps.summarize.details'),
-			number: 3,
 		},
 	] as const
 
@@ -45,11 +43,12 @@ const SummarizePage: React.FC<Props> = async ({ params: { lang }, searchParams: 
 			<VideoData link={processStep.queries.link} />
 			<div className="grid w-full grid-cols-3 gap-x-6">
 				<NextIntlProvider pick={['summarize']}>
-					{steps.map(({ label, description, number }) => (
-						<Step promise={generator.next()} label={label} description={description} number={number} />
+					{steps.map(({ label, description }) => (
+						<Step promise={generator.next()} label={label} description={description} />
 					))}
 				</NextIntlProvider>
 			</div>
+			<Submit promise={generator.return()} />
 		</section>
 	)
 }

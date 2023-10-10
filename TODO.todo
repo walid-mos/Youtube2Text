@@ -16,7 +16,7 @@
 ✔ Show Pending request one by one to make a timeline @done(23-10-05 00:01)
     ✔ -> try to do it via server components, to be a lot faster @done(23-10-05 00:01)
 ☐ Summarize text
-☐ Add a getProcessStep data function (CRUD request to simplify supabase)
+✔ Add a getProcessStep data function (CRUD request to simplify supabase) @done(23-10-10 23:42)
 ☐ Use langchain to use the data by chunks
 
 Refactor : 
