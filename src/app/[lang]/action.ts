@@ -41,5 +41,5 @@ export const onLinkSubmit = async (formData: FormData) => {
 		setTimeout(resolve, 1500)
 	})
 
-	redirect(`/summarize/?${new URLSearchParams([['uuid', uuid]])}`)
+	redirect(`/${uuid}/summarize`)
 }

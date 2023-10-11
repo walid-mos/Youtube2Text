@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { getLinkYoutubeInfos } from '../controllers'
+import { getLinkYoutubeInfos } from '../controller'
 
 type Props = {
 	link: string

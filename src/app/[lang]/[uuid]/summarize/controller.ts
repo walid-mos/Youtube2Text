@@ -8,15 +8,6 @@ const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 })
 
-export const getProcessStep = async (uuid: string) => {
-	const processStep = await getProcessStepByUUID(uuid)
-
-	// TODO: Handle better error
-	if (!processStep) throw new Error('Could not find Process Step')
-
-	return processStep
-}
-
 export const getLinkYoutubeInfos = async (link: string) => {
 	const linkFetched = await ytdl.getBasicInfo(link)
 
@@ -38,8 +29,10 @@ export const getLinkYoutubeInfos = async (link: string) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const downloadVideo = async (link: string, uuid: string) =>
+export const downloadVideo = async (link: string, uuid: string): Promise<boolean> =>
 	new Promise((resolve, reject) => {
+		if (fs.existsSync(`/tmp/${uuid}.mp3`)) resolve(true)
+
 		const audioStream = fs.createWriteStream(`/tmp/${uuid}.mp3`)
 		ytdl(link, {
 			filter: 'audioonly',
@@ -48,7 +41,7 @@ export const downloadVideo = async (link: string, uuid: string) =>
 		audioStream.on('error', reject)
 	})
 
-const transcriptLink = async (processStepId: number, uuid: string) => {
+const transcriptLink = async (processStepId: number, uuid: string): Promise<string> => {
 	const data = await getProcessStepByUUID(uuid)
 
 	if (data?.transcript) return data.transcript
@@ -65,27 +58,50 @@ const transcriptLink = async (processStepId: number, uuid: string) => {
 	return transcript
 }
 
-const summarizeVideo = async (transcript: string, processStepId: number, uuid: string) => {
+const summarizeVideo = async (transcript: string, processStepId: number, uuid: string): Promise<string> => {
 	const data = await getProcessStepByUUID(uuid)
 
 	if (data?.summary) return data.summary
 
-	const summary = { text: 'test' }
+	const completion = await openai.chat.completions.create({
+		model: 'gpt-3.5-turbo',
+		messages: [
+			{
+				role: 'system',
+				content:
+					'You are an assistant working for a CEO of a powerful company, you can speak fluently english and french, your main mission is to summarize transcripts of videos, to be understandable for a large audience, with the maximum information you can have.',
+			},
+			{ role: 'assistant', content: data?.transcript || transcript },
+			{ role: 'user', content: 'Who won the world series in 2020?' },
+		],
+	})
 
-	await setProcessStepData(processStepId, { summary: summary.text })
+	const summary = completion.choices[0].message.content
 
-	return `${transcript} summary`
+	if (!summary) throw new Error('No summary created')
+
+	await setProcessStepData(processStepId, { summary })
+
+	return summary
 }
+
+const minimalTime = <T>(fn: () => Promise<T>, time?: number): Promise<T> =>
+	new Promise(resolve => {
+		setTimeout(async () => {
+			const value = await fn()
+			resolve(value)
+		}, time ?? 2000)
+	})
 
 export async function* stepsGenerator(processStep: ProcessStepType) {
 	const { link, uuid } = processStep.queries
-	await downloadVideo(link, uuid)
+	await minimalTime(() => downloadVideo(link, uuid))
 	yield 1
 
-	const transcript = await transcriptLink(processStep.id, uuid)
+	const transcript = await minimalTime(() => transcriptLink(processStep.id, uuid))
 	yield 2
 
-	await summarizeVideo(transcript, processStep.id, uuid)
+	await minimalTime(() => summarizeVideo(transcript, processStep.id, uuid))
 	yield 3
 }
 

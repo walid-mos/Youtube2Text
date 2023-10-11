@@ -48,7 +48,8 @@
 				"details": "Stage details here"
 			},
 			"loading": "Loading...",
-			"success": "Finished !"
+			"success": "Finished !",
+			"waiting": "waiting"
 		},
 		"form": {
 			"paragraph-1": "For now you can only summarize one YouTube video at a time. Just paste the link to the video and click on Summarize.",
