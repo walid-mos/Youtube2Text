@@ -24,7 +24,9 @@
 			"1": "Notre outil basé sur l'IA génère automatiquement un résumé de toute vidéo YouTube",
 			"2": "Collez simplement le lien et obtenez un résumé en quelques secondes"
 		},
+		"link": "Collez votre lien youtube ici",
 		"button_summarize": "Commencer le résumé",
+		"button_summarize_waiting": "Lien en cours de traitement",
 		"github_link": {
 			"text": "YSumAI est Open Source sur",
 			"name": "GitHub"
@@ -32,12 +34,30 @@
 	},
 	"summarize": {
 		"title": "Résumez vos vidéos",
+		"steps": {
+			"download": {
+				"title": "Préparation des données",
+				"details": "Détails de l'étape ici"
+			},
+			"transcribe": {
+				"title": "Génération de résumé",
+				"details": "Détails de l'étape ici"
+			},
+			"summarize": {
+				"title": "Finalisation",
+				"details": "Détails de l'étape ici"
+			},
+			"loading": "En chargement ...",
+			"success": "Terminé !",
+			"waiting": "En attente"
+		},
 		"form": {
 			"paragraph-1": "Pour l'instant, vous ne pouvez résumer qu'une seule vidéo YouTube à la fois. ",
 			"paragraph-2": "Attendez ensuite que la magie opère. ",
 			"paragraph-3": "Nous travaillons sur un moyen de résumer plusieurs vidéos à la fois. "
 		},
-		"submit": "Résumer"
+		"submit": "Résumer",
+		"ai_prompt": "Fait un résumé de cette transcription, assez précise pour ne pas avoir besoin de regarder la video, mais le plus concis possible."
 	},
 	"generate": {
 		"title": "Générateur...",
@@ -55,5 +75,8 @@
 				"details": "Détails de l'étape ici"
 			}
 		}
+	},
+	"result": {
+		"title": "Votre résumé"
 	}
 }

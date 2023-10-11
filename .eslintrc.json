@@ -1,6 +1,7 @@
 {
 	"extends": ["eslint-config-mkw"],
 	"rules": {
+		"node/no-extraneous-import": "off",
 		"import/prefer-default-export": "off"
 	}
 }

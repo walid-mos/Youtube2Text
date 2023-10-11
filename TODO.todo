@@ -2,16 +2,45 @@
 ✔ Add a new language to the application @started(23-07-04 23:11) @done(23-07-09 03:55) @lasted(4d4h44m38s)
 ✔ Add a language switcher to the application @started(23-07-05 12:24) @done(23-07-09 03:55) @lasted(3d15h31m39s)
 ✔ use i18next to translate the application @done(23-07-09 21:31)
-☐ Translate the application to French @started(23-07-11 10:19)
+✔ Translate the application to French @started(23-07-11 10:19) @done(23-09-19 01:33) @lasted(9w6d15h14m5s)
 ✔ BUG: Fix server actions not working with StaticParams @done(23-07-11 10:19)
-    => SSG desactivated for the moment in root layout, to be fixed (next-intl + server actions)
+    ✔ => SSG desactivated for the moment in root layout, to be fixed (next-intl + server actions) @done(23-10-05 00:01)
 
-
-☐ Download videos from YouTube and convert them to MP3
-☐ Connect the OpenAI API to the application
-    -> Do the calcul on server side 
-    -> Send promise to client side 
-    -> useEffect to update the state of Steps
-☐ Transcribe audio files to text
-☐ Summarize text
+✔ Download videos from YouTube and convert them to MP3 @done(23-09-20 00:32)
+✔ Connect the OpenAI API to the application @done(23-09-20 00:32)
+✔ Transcribe audio files to text @done(23-09-20 00:32)
+    ✔ -> Do the calcul on server side @done(23-10-05 00:01)
+    ✔ -> Send promise to client side @done(23-10-05 00:01)
+    ✔ -> useEffect to update the state of Steps @done(23-10-05 00:01)
+    -> Add text muted effect for waiting steps not in currently use
+✔ Show Pending request one by one to make a timeline @done(23-10-05 00:01)
+    ✔ -> try to do it via server components, to be a lot faster @done(23-10-05 00:01)
+✔ Summarize text @done(23-10-11 04:30)
+✔ Add a getProcessStep data function (CRUD request to simplify supabase) @done(23-10-10 23:42)
 ☐ Use langchain to use the data by chunks
+☐ Beautify result page
+☐ Add functionalities
+    -> Bullet points
+    -> With timestamps
+    -> Research Subjects
+
+Refactor : 
+✔ Use NextUI for the navbar @done(23-09-24 14:16)
+✔ Refactor Home page @done(23-09-24 14:16)
+✔ Refactor Header @done(23-09-24 14:17)
+✔ Refactor Footer @done(23-09-24 14:17)
+✔ Add Server Action from Home Page @done(23-09-24 14:17)
+Inside server components
+✔ Fetch Youtube data and show it @done(23-09-26 14:59)
+✔ Summarize Page @done(23-10-05 00:01)
+    ✔ Download loading @done(23-10-05 00:01)
+    ✔ Transcribe loading @done(23-10-05 00:01)
+    ✔ Summarize loading @done(23-10-05 00:01)
+☐ Result page
+    ✔ Get result page @done(23-10-11 04:30)
+    ☐ Start Again action
+☐ Authentication
+    ☐ Login / Signup Modal
+    ☐ Add authenticated menu
+    ☐ Limit authenticated page 
+    ☐ Limit generation if not authenticated
