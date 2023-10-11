@@ -15,4 +15,13 @@ module.exports = withNextIntl({
 	experimental: {
 		serverActions: true,
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'i.ytimg.com',
+				pathname: '**',
+			},
+		],
+	},
 })

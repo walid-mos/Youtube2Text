@@ -5,7 +5,7 @@ import { getTranslator } from 'next-intl/server'
 
 import { GITHUB_REPO_URL } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
-import { Button } from '@/components/global/Button'
+import { Button } from '@/components/ui/Button'
 
 import { onLinkSubmit } from './action'
 import { SubmitButton } from './_components/SubmitButton'
@@ -16,7 +16,7 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 	const t = await getTranslator(lang, 'home')
 
 	return (
-		<section className="flex flex-col items-center gap-y-10 sm:px-4">
+		<section className="grid justify-items-center place-content-center gap-y-10 sm:px-4">
 			<h1
 				className={cn(
 					'text-transparent bg-gradient-to-t bg-clip-text from-zinc-800/70 to-zinc-400',
@@ -32,8 +32,11 @@ const Home: React.FC<LangProps> = async ({ params: { lang } }) => {
 			<form action={onLinkSubmit} className="flex flex-col items-center w-full max-w-2xl gap-y-10">
 				<Input
 					name="link"
-					className="mt-12"
-					classNames={{ input: cn('placeholder:text-center') }}
+					className="mt-12 caret-red-700"
+					classNames={{
+						input: cn('text-center placeholder:text-center'),
+						inputWrapper: 'hover:border-red-400/50 after:bg-red-600',
+					}}
 					variant="underlined"
 					placeholder={t('link')}
 					autoFocus

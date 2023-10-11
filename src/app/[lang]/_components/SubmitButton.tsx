@@ -3,7 +3,7 @@
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { Spinner } from '@nextui-org/spinner'
 
-import { Button as ButtonComponent } from '@/components/global/Button'
+import { Button as ButtonComponent } from '@/components/ui/Button'
 import { NextIcon } from '@/components/icons'
 
 type Props = {

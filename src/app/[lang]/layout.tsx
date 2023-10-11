@@ -4,11 +4,11 @@ import { Inter } from 'next/font/google'
 import Analytics from '@/components/misc/Analytics'
 import { LOCALES, LOCALES_TYPE } from '@/utils/constants'
 import { cn } from '@/utils/classnames'
+import { setServerLocale } from '@/utils/locale'
 
 import Header from './_components/Header'
 import Footer from './_components/Footer'
 import Providers from './providers'
-import { getNavigationLinks } from './controller'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -35,6 +35,8 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 		throw new Error(`Unsupported locale: ${lang}`)
 	}
 
+	setServerLocale(lang)
+
 	return (
 		<html lang={lang} className={cn(inter.className, 'light')}>
 			<head />
@@ -43,11 +45,11 @@ const RootLayout = async ({ children, params: { lang } }: Props) => {
 				<Providers>
 					<div className="flex flex-col justify-between min-h-screen p-6 mx-auto md:p-12 max-w-7xl">
 						<header className="backdrop-blur bh-zinc-900/50">
-							<Header navigation={await getNavigationLinks(lang)} />
+							<Header />
 						</header>
-						<main className="gap-8 my-8 md:gap-16 md:my-14 lg:my-20">{children}</main>
+						<main className="grid flex-grow my-4 md:my-8 lg:my-14">{children}</main>
 						<footer className="border-t inset-2x-0 border-zinc-500/10 dark:border-zinc-200">
-							<Footer lang={lang} />
+							<Footer />
 						</footer>
 					</div>
 				</Providers>

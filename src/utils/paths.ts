@@ -1,10 +1,24 @@
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
-export const getPathname = () => {
+import type { LOCALES_TYPE } from './constants'
+
+export const useSwitchLanguage = (newLangCode: LOCALES_TYPE) => {
 	const pathname = usePathname()
+	const searchParams = useSearchParams()
 
-	// delete locale
-	const [, , ...truePathname] = pathname.split('/')
+	const segments = pathname.split('/')
+	const oldLang = segments[1]
+	segments[1] = newLangCode
 
-	return `/${truePathname.join('/')}`
+	let href = `${segments.join('/')}`
+	if (searchParams.size > 0) {
+		href += `?`
+		const params: Array<string> = []
+		searchParams.forEach((value, key) => {
+			params.push(`${key}=${value}`)
+		})
+		href += params.join('&')
+	}
+
+	return [href, oldLang]
 }

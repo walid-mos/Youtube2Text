@@ -1,12 +1,14 @@
 import Link from 'next/link'
 
+import React, { Fragment } from 'react'
+
 import { getTranslator } from 'next-intl/server'
 
-import { GITHUB_PROFILE_URL, type LOCALES_TYPE } from '@/utils/constants'
+import { GITHUB_PROFILE_URL, LOCALES } from '@/utils/constants'
+import { Separator } from '@/components/ui/Separator'
+import { getServerLocale } from '@/utils/locale'
 
-type Props = {
-	lang: LOCALES_TYPE
-}
+import LangItem from './LangItem'
 
 type ExternalLinkProps = {
 	href: string
@@ -19,8 +21,10 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 	</Link>
 )
 
-const Footer: React.FC<Props> = async ({ lang }) => {
+const Footer = async () => {
+	const lang = getServerLocale()
 	const t = await getTranslator(lang, 'layout.footer')
+
 	return (
 		<div className="gap-1 pt-8 text-xs text-center md:px-12 md:mx-12 text-zinc-700 dark:text-zinc-300 lg:px-8">
 			<p>
@@ -33,6 +37,14 @@ const Footer: React.FC<Props> = async ({ lang }) => {
 			<p>
 				{t('powered')} <ExternalLink href="https://openai.com/">OpenAI</ExternalLink>.
 			</p>
+			<div className="flex items-center justify-center h-5 my-3">
+				{LOCALES.map((locale, index) => (
+					<Fragment key={locale}>
+						<LangItem itemLocale={locale} />
+						{index < LOCALES.length - 1 && <Separator orientation="vertical" />}
+					</Fragment>
+				))}
+			</div>
 		</div>
 	)
 }
