@@ -56,7 +56,8 @@
 			"paragraph-2": "Attendez ensuite que la magie opère. ",
 			"paragraph-3": "Nous travaillons sur un moyen de résumer plusieurs vidéos à la fois. "
 		},
-		"submit": "Résumer"
+		"submit": "Résumer",
+		"ai_prompt": "Fait un résumé de cette transcription, assez précise pour ne pas avoir besoin de regarder la video, mais le plus concis possible."
 	},
 	"generate": {
 		"title": "Générateur...",

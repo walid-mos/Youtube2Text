@@ -1,8 +1,10 @@
 import OpenAI from 'openai'
 import fs from 'fs'
 import ytdl from 'ytdl-core'
+import { createTranslator } from 'next-intl'
 
 import { ProcessStepType, getProcessStepByUUID, setProcessStepData } from '@/supabase/functions/processLink'
+import { LOCALES_TYPE } from '@/utils/constants'
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
@@ -58,13 +60,20 @@ const transcriptLink = async (processStepId: number, uuid: string): Promise<stri
 	return transcript
 }
 
-const summarizeVideo = async (transcript: string, processStepId: number, uuid: string): Promise<string> => {
+const summarizeVideo = async (
+	transcript: string,
+	processStepId: number,
+	uuid: string,
+	locale: LOCALES_TYPE,
+): Promise<string> => {
 	const data = await getProcessStepByUUID(uuid)
 
 	if (data?.summary) return data.summary
 
+	const t = createTranslator({ locale, messages: await import(`@/locales/${locale}.json`) })
+
 	const completion = await openai.chat.completions.create({
-		model: 'gpt-3.5-turbo',
+		model: 'gpt-3.5-turbo-16k',
 		messages: [
 			{
 				role: 'system',
@@ -72,7 +81,7 @@ const summarizeVideo = async (transcript: string, processStepId: number, uuid: s
 					'You are an assistant working for a CEO of a powerful company, you can speak fluently english and french, your main mission is to summarize transcripts of videos, to be understandable for a large audience, with the maximum information you can have.',
 			},
 			{ role: 'assistant', content: data?.transcript || transcript },
-			{ role: 'user', content: 'Who won the world series in 2020?' },
+			{ role: 'user', content: t('summarize.ai_prompt') },
 		],
 	})
 
@@ -93,7 +102,7 @@ const minimalTime = <T>(fn: () => Promise<T>, time?: number): Promise<T> =>
 		}, time ?? 2000)
 	})
 
-export async function* stepsGenerator(processStep: ProcessStepType) {
+export async function* stepsGenerator(processStep: ProcessStepType, locale: LOCALES_TYPE) {
 	const { link, uuid } = processStep.queries
 	await minimalTime(() => downloadVideo(link, uuid))
 	yield 1
@@ -101,7 +110,7 @@ export async function* stepsGenerator(processStep: ProcessStepType) {
 	const transcript = await minimalTime(() => transcriptLink(processStep.id, uuid))
 	yield 2
 
-	await minimalTime(() => summarizeVideo(transcript, processStep.id, uuid))
+	await minimalTime(() => summarizeVideo(transcript, processStep.id, uuid, locale))
 	yield 3
 }
 

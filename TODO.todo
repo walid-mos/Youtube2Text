@@ -15,9 +15,14 @@
     -> Add text muted effect for waiting steps not in currently use
 ✔ Show Pending request one by one to make a timeline @done(23-10-05 00:01)
     ✔ -> try to do it via server components, to be a lot faster @done(23-10-05 00:01)
-☐ Summarize text
+✔ Summarize text @done(23-10-11 04:30)
 ✔ Add a getProcessStep data function (CRUD request to simplify supabase) @done(23-10-10 23:42)
 ☐ Use langchain to use the data by chunks
+☐ Beautify result page
+☐ Add functionalities
+    -> Bullet points
+    -> With timestamps
+    -> Research Subjects
 
 Refactor : 
 ✔ Use NextUI for the navbar @done(23-09-24 14:16)
@@ -32,7 +37,7 @@ Inside server components
     ✔ Transcribe loading @done(23-10-05 00:01)
     ✔ Summarize loading @done(23-10-05 00:01)
 ☐ Result page
-    ☐ Get result page
+    ✔ Get result page @done(23-10-11 04:30)
     ☐ Start Again action
 ☐ Authentication
     ☐ Login / Signup Modal

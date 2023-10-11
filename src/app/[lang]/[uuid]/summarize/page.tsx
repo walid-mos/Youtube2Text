@@ -45,7 +45,7 @@ const SummarizePage: React.FC<Props> = async ({ params: { lang }, params: { uuid
 	const processStep = await getProcessStepByUUID(uuid)
 	if (!processStep) notFound()
 
-	const generator = stepsGenerator(processStep)
+	const generator = stepsGenerator(processStep, lang)
 
 	return (
 		<section className="grid gap-6 auto-rows-[min-content_min-content_1fr] place-items-center">

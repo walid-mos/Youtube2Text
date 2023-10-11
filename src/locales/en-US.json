@@ -56,7 +56,8 @@
 			"paragraph-2": "Then wait for the magic to happen. It may take a few minutes depending on the length of the video.",
 			"paragraph-3": "We are working on a way to summarize multiple videos at once. Stay tuned!"
 		},
-		"submit": "Summarize"
+		"submit": "Summarize",
+		"ai_prompt": "Provide a summary of this transcription, detailed enough not to require watching the video, but as concise as possible."
 	},
 	"generate": {
 		"title": "Generating...",
